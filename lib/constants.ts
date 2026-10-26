@@ -25,9 +25,9 @@ export const BRAND = {
 
 export const NAV_LINKS = [
   { name: "Home", href: "/" },
-  { name: "About Us", href: "/about" },
+  { name: "About", href: "/about" },
   {
-    name: "Our Services",
+    name: "Services",
     href: "/services/loan-settlement",
     children: [
       {
@@ -58,9 +58,8 @@ export const NAV_LINKS = [
     ],
   },
   { name: "How It Works", href: "/how-it-works" },
-  { name: "Free Consultation", href: "/free-consultation" },
   { name: "FAQs", href: "/faqs" },
-  { name: "Resources", href: "/blog" },
+  { name: "Guides", href: "/blog" },
   { name: "Contact", href: "/contact" },
 ];
 
