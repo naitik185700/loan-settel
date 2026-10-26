@@ -1,0 +1,75 @@
+"use client";
+
+import React, { useState } from "react";
+import { ShieldCheck, Loader2, ExternalLink } from "lucide-react";
+
+interface HomeZohoSectionProps {
+  zohoUrl?: string;
+}
+
+export default function HomeZohoSection({
+  zohoUrl = "https://forms.zohopublic.in/rddslegalsolutionsopcprivatel1/form/InquiryForm/formperma/HyvqgErILmK-RGLlxZhGBqi2leGDhXEjXaAgyI5RegI",
+}: HomeZohoSectionProps) {
+  const [iframeLoaded, setIframeLoaded] = useState(false);
+
+  return (
+    <div className="bg-white rounded-2xl shadow-card border border-brand-border overflow-hidden">
+      {/* Top Banner */}
+      <div className="bg-brand-navy p-6 sm:p-8 text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-brand-emerald/20 text-brand-emerald-light text-xs font-semibold mb-2.5">
+            <ShieldCheck className="w-3.5 h-3.5" />
+            Confidential &amp; Protected
+          </div>
+          <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
+            Confidential Case Evaluation
+          </h3>
+          <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl leading-relaxed">
+            Speak with an experienced debt resolution advisor. No upfront fees to understand your rights.
+          </p>
+        </div>
+
+        <a
+          href={zohoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors self-start sm:self-auto shrink-0"
+        >
+          <span>Open Fullscreen</span>
+          <ExternalLink className="w-3.5 h-3.5" />
+        </a>
+      </div>
+
+      {/* Embedded Zoho Form */}
+      <div className="relative w-full min-h-[750px] bg-slate-50 flex flex-col">
+        {!iframeLoaded && (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-white z-10 p-6 space-y-3">
+            <Loader2 className="w-8 h-8 animate-spin text-brand-emerald" />
+            <p className="text-sm font-semibold text-brand-navy">
+              Loading secure evaluation form...
+            </p>
+            <p className="text-xs text-slate-400 text-center max-w-sm">
+              Please wait while the official Zoho consultation form loads.
+            </p>
+          </div>
+        )}
+        <iframe
+          src={zohoUrl}
+          title="Settle Loan Expert Confidential Debt Consultation"
+          className="w-full h-[780px] border-0"
+          onLoad={() => setIframeLoaded(true)}
+          allow="camera; microphone; geolocation"
+        />
+      </div>
+
+      {/* Footer reassurance badges */}
+      <div className="py-3 px-6 bg-brand-surface border-t border-brand-border/60 flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-[11px] text-slate-500">
+        <span>🔒 256-Bit SSL Encryption</span>
+        <span>•</span>
+        <span>🚫 No Upfront Lender Charges</span>
+        <span>•</span>
+        <span>🛡️ 100% Confidential</span>
+      </div>
+    </div>
+  );
+}

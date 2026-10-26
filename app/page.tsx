@@ -4,6 +4,7 @@ import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 import { BRAND } from "@/lib/constants";
 import EnquiryForm from "@/components/EnquiryForm";
+import HomeZohoSection from "@/components/HomeZohoSection";
 import FAQAccordion from "@/components/FAQAccordion";
 import {
   ShieldCheck,
@@ -617,7 +618,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 8. LEAD-GENERATION FORM SECTION */}
+      {/* 8. LEAD-GENERATION FORM SECTION (ZOHO EMBED) */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div className="text-center space-y-2 mb-8">
           <span className="text-xs font-bold uppercase tracking-wider text-brand-emerald">
@@ -632,11 +633,7 @@ export default async function HomePage() {
           </p>
         </div>
 
-        <EnquiryForm
-          title="Confidential Case Evaluation"
-          subtitle="Speak with an experienced debt resolution advisor. No upfront fees to understand your rights."
-          source="homepage_bottom_cta"
-        />
+        <HomeZohoSection zohoUrl={BRAND.zohoFormUrl} />
       </section>
     </div>
   );
