@@ -76,12 +76,6 @@ export default function ContactPage() {
                     >
                       {BRAND.email}
                     </a>
-                    <a
-                      href={`mailto:${BRAND.infoEmail}`}
-                      className="text-xs text-brand-muted hover:text-brand-emerald block mt-0.5"
-                    >
-                      {BRAND.infoEmail}
-                    </a>
                   </div>
                 </div>
 

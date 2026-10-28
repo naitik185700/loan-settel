@@ -267,7 +267,7 @@ A common myth is that settling a debt destroys your financial future permanently
   const settings = [
     { key: 'company_name', value: 'Settle Loan Expert' },
     { key: 'support_phone', value: '+91 88609 41586' },
-    { key: 'support_email', value: 'support@settleloanexpert.in' },
+    { key: 'support_email', value: 'info@settleloanexpert.in' },
     { key: 'office_hours', value: 'Mon–Sat: 10:00 AM – 7:00 PM IST' },
     { key: 'head_office', value: 'Spaze iTech Park, Sohna Road, Sector 49, Gurugram, Haryana 122018, India' },
     { key: 'zoho_form_url', value: 'https://forms.zohopublic.in/rddslegalsolutionsopcprivatel1/form/InquiryForm/formperma/HyvqgErILmK-RGLlxZhGBqi2leGDhXEjXaAgyI5RegI' },

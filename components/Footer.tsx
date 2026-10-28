@@ -120,12 +120,6 @@ export default function Footer() {
                   >
                     {BRAND.email}
                   </a>
-                  <a
-                    href={`mailto:${BRAND.infoEmail}`}
-                    className="text-slate-400 hover:text-brand-emerald-light block text-xs mt-0.5"
-                  >
-                    {BRAND.infoEmail}
-                  </a>
                 </div>
               </div>
 

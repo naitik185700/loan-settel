@@ -5,7 +5,7 @@ export const BRAND = {
   shortDescription:
     "Confidential, ethical guidance on debt settlement, credit card relief, and structured repayment solutions under RBI guidelines in India.",
   phone: "+91 88609 41586",
-  email: "support@settleloanexpert.in",
+  email: "info@settleloanexpert.in",
   infoEmail: "info@settleloanexpert.in",
   hours: "Monday – Saturday: 10:00 AM – 7:00 PM IST",
   address: "Sector 49, Sohna Road, Gurugram, Haryana 122018, India",
