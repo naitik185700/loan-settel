@@ -114,3 +114,171 @@ model SiteSetting {
   value     String
   updatedAt DateTime @updatedAt
 }
+
+// ==================== SEO & BACKLINK MANAGEMENT PLATFORM ====================
+
+model SeoProspect {
+  id                  String              @id @default(cuid())
+  domain              String
+  pageUrl             String
+  title               String
+  category            String              // Personal Finance, Financial Literacy, Consumer Rights, Legal Info, MSME & Business, Professional Association, Local Gurugram Directory, Podcast & Media, Resource Page
+  editorialGuidelines String?
+  topicalRelevance    Int                 @default(15) // Max 30
+  editorialCredibility Int                @default(10) // Max 20
+  audiencePotential   Int                 @default(8)  // Max 15
+  indianRelevance     Int                 @default(5)  // Max 10
+  editorialOpportunity Int                @default(8)  // Max 15
+  websiteQuality      Int                 @default(5)  // Max 10
+  priorityScore       Int                 @default(51) // Computed 0 - 100
+  contactName         String?
+  contactEmail        String?
+  contactUrl          String?
+  estimatedEffort     String?             @default("Medium") // Low, Medium, High
+  riskIndicators      String?             @default("CLEAN") // CLEAN, LINK_FARM, PAID_LINK_WARNING, CASINO_GAMBLING_SPAM, NO_EDITORIAL_STANDARDS, UNNATURAL_OUTBOUND
+  outreachStatus      String              @default("DISCOVERED") // DISCOVERED, QUALIFIED, PITCH_DRAFTED, PITCH_APPROVED, SENT, REPLIED, DECLINED, CONVERTED, SUPPRESSED
+  notes               String?
+  targetLandingPage   String?             @default("/services/loan-settlement")
+  verifiedDate        DateTime?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
+  pitches             OutreachPitch[]
+  backlinks           MonitoredBacklink[]
+}
+
+model CompetitorDomain {
+  id          String               @id @default(cuid())
+  domain      String               @unique
+  companyName String
+  marketFocus String?              // e.g. "Personal loan settlement, Credit card OTS"
+  notes       String?
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  backlinks   CompetitorBacklink[]
+}
+
+model CompetitorBacklink {
+  id              String           @id @default(cuid())
+  competitorId    String
+  competitor      CompetitorDomain @relation(fields: [competitorId], references: [id], onDelete: Cascade)
+  referringDomain String
+  referringUrl    String
+  anchorText      String?
+  targetUrl       String
+  linkType        String?          @default("Editorial") // Editorial, Directory, Guest Post, Resource, Unknown
+  gapStatus       String           @default("UNEXPLORED") // UNEXPLORED, QUALIFIED_PROSPECT, ACQUIRED, REJECTED
+  createdAt       DateTime         @default(now())
+}
+
+model DirectoryListing {
+  id               String    @id @default(cuid())
+  name             String
+  directoryUrl     String
+  category         String    @default("National Business") // Gurugram Local, National Business, Financial Services, MSME Portal, Legal & Taxation
+  listingUrl       String?
+  status           String    @default("DISCOVERED") // DISCOVERED, IN_REVIEW, SUBMITTED, APPROVED, LIVE, REJECTED
+  isPaid           Boolean   @default(false)
+  pricing          String?
+  napConsistent    Boolean   @default(true) // Name, Address, Phone matches Settle Loan Expert Gurugram
+  backlinkVerified Boolean   @default(false)
+  relAttribute     String?   @default("nofollow") // follow, nofollow, ugc
+  submissionNotes  String?
+  lastChecked      DateTime?
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+}
+
+model OutreachPitch {
+  id              String      @id @default(cuid())
+  prospectId      String
+  prospect        SeoProspect @relation(fields: [prospectId], references: [id], onDelete: Cascade)
+  angleType       String      // BORROWER_RIGHTS, RBI_OTS_VERIFICATION, CREDIT_REPAIR_AFTER_SETTLEMENT, DEBT_STATISTICS_INDIA, EXPERT_COMMENTARY
+  pitchSubject    String
+  pitchBody       String
+  targetAssetUrl  String      // e.g. https://settleloanexpert.in/blog/rbi-fair-practices-code-borrower-rights
+  status          String      @default("DRAFT") // DRAFT, APPROVED, SENT, REPLIED, ACCEPTED, REJECTED
+  approvedBy      String?
+  sentAt          DateTime?
+  followUpDate    DateTime?
+  responseNotes   String?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+}
+
+model MonitoredBacklink {
+  id              String             @id @default(cuid())
+  prospectId      String?
+  prospect        SeoProspect?       @relation(fields: [prospectId], references: [id], onDelete: SetNull)
+  referringUrl    String
+  targetUrl       String
+  anchorText      String?
+  relAttribute    String             @default("follow") // follow, nofollow, ugc, sponsored
+  httpStatus      Int                @default(200)
+  isLive          Boolean            @default(true)
+  toxicityScore   Int                @default(0) // 0-100
+  toxicityReason  String?
+  isDisavowed     Boolean            @default(false)
+  lastCheckedAt   DateTime?
+  errorCount      Int                @default(0)
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+  checkLogs       BacklinkCheckLog[]
+}
+
+model BacklinkCheckLog {
+  id             String            @id @default(cuid())
+  backlinkId     String
+  backlink       MonitoredBacklink @relation(fields: [backlinkId], references: [id], onDelete: Cascade)
+  checkedAt      DateTime          @default(now())
+  httpStatus     Int
+  anchorFound    String?
+  relFound       String?
+  isFound        Boolean
+  responseTimeMs Int?
+  rawDetails     String?
+}
+
+model SeoAuditFinding {
+  id             String    @id @default(cuid())
+  url            String
+  pageTitle      String?
+  issueType      String    // BROKEN_LINK, MISSING_CANONICAL, TITLE_LENGTH, DUPLICATE_META, SLOW_RESPONSE, SITEMAP_ORPHAN
+  severity       String    // HIGH, MEDIUM, LOW, INFO
+  description    String
+  recommendation String
+  isResolved     Boolean   @default(false)
+  createdAt      DateTime  @default(now())
+  resolvedAt     DateTime?
+}
+
+model SearchConsoleData {
+  id          String   @id @default(cuid())
+  date        DateTime
+  query       String?
+  page        String?
+  clicks      Int      @default(0)
+  impressions Int      @default(0)
+  ctr         Float    @default(0.0)
+  position    Float    @default(0.0)
+  isEstimated Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}
+
+model AnalyticsData {
+  id           String   @id @default(cuid())
+  date         DateTime
+  channel      String   // Organic Search, Direct, Referral, Social
+  sessions     Int      @default(0)
+  users        Int      @default(0)
+  enquiryLeads Int      @default(0)
+  bounceRate   Float    @default(0.0)
+  isEstimated  Boolean  @default(false)
+  createdAt    DateTime @default(now())
+}
+
+model SeoSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}

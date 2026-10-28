@@ -17,6 +17,17 @@ import {
   ExternalLink,
   UserCheck,
   Bell,
+  Globe,
+  Link2,
+  Target,
+  Send,
+  Activity,
+  FileSearch,
+  AlertTriangle,
+  TrendingUp,
+  FolderDown,
+  Building2,
+  FileCheck2,
 } from "lucide-react";
 
 interface AdminLayoutProps {
@@ -127,6 +138,81 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     },
   ];
 
+  const seoNavItems = [
+    {
+      name: "SEO Overview",
+      href: "/admin/seo",
+      icon: Globe,
+      roles: ["SUPER_ADMIN", "ADMIN", "CONTENT_MANAGER"],
+    },
+    {
+      name: "Backlink Prospects",
+      href: "/admin/seo/prospects",
+      icon: Target,
+      roles: ["SUPER_ADMIN", "ADMIN", "CONTENT_MANAGER"],
+    },
+    {
+      name: "Competitor Intelligence",
+      href: "/admin/seo/competitors",
+      icon: Activity,
+      roles: ["SUPER_ADMIN", "ADMIN", "CONTENT_MANAGER"],
+    },
+    {
+      name: "Directory Listings",
+      href: "/admin/seo/directories",
+      icon: Building2,
+      roles: ["SUPER_ADMIN", "ADMIN", "CONTENT_MANAGER"],
+    },
+    {
+      name: "Editorial Outreach",
+      href: "/admin/seo/outreach",
+      icon: Send,
+      roles: ["SUPER_ADMIN", "ADMIN", "CONTENT_MANAGER"],
+    },
+    {
+      name: "Backlink Monitoring",
+      href: "/admin/seo/monitoring",
+      icon: Link2,
+      roles: ["SUPER_ADMIN", "ADMIN", "CONTENT_MANAGER"],
+    },
+    {
+      name: "Content Promotion",
+      href: "/admin/seo/content",
+      icon: FileCheck2,
+      roles: ["SUPER_ADMIN", "ADMIN", "CONTENT_MANAGER"],
+    },
+    {
+      name: "Technical SEO Audit",
+      href: "/admin/seo/audit",
+      icon: FileSearch,
+      roles: ["SUPER_ADMIN", "ADMIN", "CONTENT_MANAGER"],
+    },
+    {
+      name: "Toxicity & Disavow",
+      href: "/admin/seo/disavow",
+      icon: AlertTriangle,
+      roles: ["SUPER_ADMIN", "ADMIN"],
+    },
+    {
+      name: "Search Console & Analytics",
+      href: "/admin/seo/analytics",
+      icon: TrendingUp,
+      roles: ["SUPER_ADMIN", "ADMIN", "CONTENT_MANAGER"],
+    },
+    {
+      name: "Reports & CSV Export",
+      href: "/admin/seo/reports",
+      icon: FolderDown,
+      roles: ["SUPER_ADMIN", "ADMIN", "CONTENT_MANAGER"],
+    },
+    {
+      name: "SEO API Settings",
+      href: "/admin/seo/settings",
+      icon: Settings,
+      roles: ["SUPER_ADMIN"],
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-slate-50 flex">
       {/* Sidebar Desktop */}
@@ -147,27 +233,67 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           </div>
         </div>
 
-        <nav className="flex-1 p-4 space-y-1.5 overflow-y-auto">
-          {navItems
-            .filter((item) => !user || item.roles.includes(user.role))
-            .map((item) => {
-              const isActive = pathname === item.href;
-              const Icon = item.icon;
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-colors ${
-                    isActive
-                      ? "bg-brand-emerald text-white shadow-sm"
-                      : "text-slate-300 hover:bg-brand-navy-800 hover:text-white"
-                  }`}
-                >
-                  <Icon className="w-4 h-4" />
-                  {item.name}
-                </Link>
-              );
-            })}
+        <nav className="flex-1 p-4 space-y-6 overflow-y-auto">
+          {/* Core Operations */}
+          <div>
+            <div className="text-[10px] uppercase tracking-wider font-bold text-slate-400 px-3 mb-2">
+              Core Operations
+            </div>
+            <div className="space-y-1">
+              {navItems
+                .filter((item) => !user || item.roles.includes(user.role))
+                .map((item) => {
+                  const isActive = pathname === item.href;
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${
+                        isActive
+                          ? "bg-brand-emerald text-white shadow-sm"
+                          : "text-slate-300 hover:bg-brand-navy-800 hover:text-white"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4 shrink-0" />
+                      <span className="truncate">{item.name}</span>
+                    </Link>
+                  );
+                })}
+            </div>
+          </div>
+
+          {/* SEO & Backlink Suite */}
+          <div>
+            <div className="text-[10px] uppercase tracking-wider font-bold text-brand-emerald-light px-3 mb-2 flex items-center justify-between">
+              <span>SEO & Backlinks</span>
+              <span className="bg-brand-emerald/20 text-brand-emerald px-1.5 py-0.5 rounded text-[9px] font-mono">
+                White-Hat
+              </span>
+            </div>
+            <div className="space-y-1">
+              {seoNavItems
+                .filter((item) => !user || item.roles.includes(user.role))
+                .map((item) => {
+                  const isActive = pathname === item.href || (item.href !== "/admin/seo" && pathname.startsWith(item.href));
+                  const Icon = item.icon;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold transition-colors ${
+                        isActive
+                          ? "bg-brand-emerald text-white shadow-sm"
+                          : "text-slate-300 hover:bg-brand-navy-800 hover:text-white"
+                      }`}
+                    >
+                      <Icon className="w-4 h-4 shrink-0" />
+                      <span className="truncate">{item.name}</span>
+                    </Link>
+                  );
+                })}
+            </div>
+          </div>
         </nav>
 
         {/* User Profile & Logout */}

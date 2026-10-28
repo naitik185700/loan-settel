@@ -40,6 +40,18 @@ export async function getSession(): Promise<SessionPayload | null> {
   return await verifySessionToken(token);
 }
 
+export async function getCurrentUser() {
+  const session = await getSession();
+  if (!session) return null;
+  return {
+    id: session.userId,
+    userId: session.userId,
+    email: session.email,
+    name: session.name,
+    role: session.role,
+  };
+}
+
 export function setSessionCookie(response: NextResponse, token: string) {
   response.cookies.set({
     name: COOKIE_NAME,
