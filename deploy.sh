@@ -19,7 +19,8 @@ else
     npm install --production=false
     npx prisma generate
     npx prisma db push
-    node prisma/seed.js
+    node prisma/seed.js || true
+    node prisma/seed-seo.js || true
     npm run build
 
     if command -v pm2 &> /dev/null; then
