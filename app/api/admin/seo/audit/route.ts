@@ -19,6 +19,7 @@ const PUBLIC_PAGES_TO_AUDIT = [
   { path: "/blog/rebuilding-cibil-score-post-settlement", canonical: "https://settleloanexpert.in/blog/rebuilding-cibil-score-post-settlement" },
   { path: "/blog/credit-card-debt-resolution-strategies", canonical: "https://settleloanexpert.in/blog/credit-card-debt-resolution-strategies" },
   { path: "/blog/rbi-fair-practices-code-borrower-rights", canonical: "https://settleloanexpert.in/blog/rbi-fair-practices-code-borrower-rights" },
+  { path: "/blog/rbi-mandates-loan-settlement-2026-cibil-reporting-penal-charges", canonical: "https://settleloanexpert.in/blog/rbi-mandates-loan-settlement-2026-cibil-reporting-penal-charges" },
   { path: "/contact", canonical: "https://settleloanexpert.in/contact" },
   { path: "/privacy-policy", canonical: "https://settleloanexpert.in/privacy-policy" },
   { path: "/terms-and-conditions", canonical: "https://settleloanexpert.in/terms-and-conditions" },

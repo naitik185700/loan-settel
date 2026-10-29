@@ -17,6 +17,21 @@ import {
 
 const LINKABLE_ASSETS = [
   {
+    title: "RBI Mandates & Loan Settlement in 2026: Fortnightly CIBIL Reporting, Penal Charge Limits & Borrower Rights",
+    slug: "rbi-mandates-loan-settlement-2026-cibil-reporting-penal-charges",
+    canonicalUrl: "https://settleloanexpert.in/blog/rbi-mandates-loan-settlement-2026-cibil-reporting-penal-charges",
+    category: "Banking Compliance & Market Trends 2026",
+    icon: ShieldCheck,
+    summary:
+      "Timely market analysis of RBI's fortnightly credit reporting directive, bans on compounding penal interest, and pre-litigation settlement concessions through National Lok Adalat sessions.",
+    targetAudiences: ["National business journalists (Financial Express, Economic Times)", "Consumer finance columns", "MSME & salaried borrower portals"],
+    hookStats: [
+      "Credit reporting mandated every 15 days, reflecting settlement updates significantly faster.",
+      "Lenders strictly prohibited from compounding penal charges or capitalizing overdue fees.",
+      "National Lok Adalat consent decrees provide non-appealable, final debt closure.",
+    ],
+  },
+  {
     title: "RBI Fair Practices Code & Borrower Protections Against Recovery Harassment",
     slug: "rbi-fair-practices-code-borrower-rights",
     canonicalUrl: "https://settleloanexpert.in/blog/rbi-fair-practices-code-borrower-rights",

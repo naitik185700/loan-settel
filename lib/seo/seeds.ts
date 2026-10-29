@@ -318,6 +318,29 @@ export const INITIAL_COMPETITORS = [
 
 export const INITIAL_PITCH_TEMPLATES = [
   {
+    angleType: "RBI_2026_MANDATES",
+    title: "RBI 2026 Fortnightly CIBIL Reporting & Penal Interest Limits: Consumer Impact",
+    targetAssetUrl: "https://settleloanexpert.in/blog/rbi-mandates-loan-settlement-2026-cibil-reporting-penal-charges",
+    pitchSubject: "Article Pitch: How RBI's Fortnightly Credit Reporting & Penal Charge Rules Alter Debt Resolution",
+    pitchBody: `Dear Editorial Desk at {{publication}},
+
+With the Reserve Bank of India enforcing fortnightly credit bureau reporting and strictly disallowing the compounding of penal charges, retail borrowers facing debt distress are operating under an entirely new framework in 2026.
+
+At Settle Loan Expert, our advisory team has broken down the real-world implications:
+1. Why borrowers' credit scores reflect delinquency within 15-20 days, but also record "Settled" status significantly faster once settlement terms are met.
+2. How to audit loan accounts to eliminate unauthorized capitalized penal interest before agreeing to settlement amounts.
+3. Leveraging National Lok Adalat benches to secure non-appealable judicial debt concessions.
+
+Full analysis preview: https://settleloanexpert.in/blog/rbi-mandates-loan-settlement-2026-cibil-reporting-penal-charges
+
+Would your readers benefit from a detailed expert op-ed exploring these points?
+
+Warm regards,
+Senior Advisory Desk
+Settle Loan Expert (Gurugram, Haryana)
+info@settelloanexpert.in`,
+  },
+  {
     angleType: "BORROWER_RIGHTS",
     title: "RBI Fair Practices Code & Borrower Protections Against Recovery Harassment",
     targetAssetUrl: "https://settleloanexpert.in/blog/rbi-fair-practices-code-borrower-rights",
