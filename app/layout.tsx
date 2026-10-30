@@ -139,6 +139,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="canonical" href="https://settleloanexpert.in" />
+        <link rel="preload" as="image" href="/images/logo.png" fetchPriority="high" />
         <meta
           name="robots"
           content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"

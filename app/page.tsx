@@ -113,6 +113,8 @@ export default async function HomePage() {
                     alt="Senior Indian financial advisor in consultation with client"
                     fill
                     priority
+                    loading="eager"
+                    fetchPriority="high"
                     sizes="(max-width: 1024px) 100vw, 500px"
                     className="object-cover"
                   />

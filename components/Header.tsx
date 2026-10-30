@@ -61,9 +61,13 @@ export default function Header() {
                 <Image
                   src="/images/logo.png"
                   alt="Settle Loan Expert"
-                  fill
+                  width={192}
+                  height={44}
                   priority
-                  className="object-contain object-left"
+                  loading="eager"
+                  fetchPriority="high"
+                  sizes="192px"
+                  className="h-10 w-auto sm:h-11 object-contain object-left"
                 />
               </div>
             </Link>
