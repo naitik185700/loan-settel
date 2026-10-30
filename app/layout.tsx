@@ -10,8 +10,14 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const appUrl =
+  process.env.NEXT_PUBLIC_APP_URL &&
+  !process.env.NEXT_PUBLIC_APP_URL.includes("localhost")
+    ? process.env.NEXT_PUBLIC_APP_URL
+    : "https://settleloanexpert.in";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://settleloanexpert.in"),
+  metadataBase: new URL(appUrl),
   title: {
     default: "Settle Loan Expert | Debt Settlement & Loan Relief Advisors India",
     template: "%s | Settle Loan Expert",
