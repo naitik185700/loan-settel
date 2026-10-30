@@ -10,8 +10,10 @@ export const BRAND = {
   hours: "Monday – Saturday: 10:00 AM – 7:00 PM IST",
   address: "Sector 49, Sohna Road, Gurugram, Haryana 122018, India",
   zohoFormUrl:
-    process.env.NEXT_PUBLIC_ZOHO_FORM_URL ||
-    "https://forms.zoho.in/formsdemo/home#myforms",
+    process.env.NEXT_PUBLIC_ZOHO_FORM_URL &&
+    process.env.NEXT_PUBLIC_ZOHO_FORM_URL.includes("/formperma/")
+      ? process.env.NEXT_PUBLIC_ZOHO_FORM_URL
+      : "https://forms.zohopublic.in/rddslegalsolutionsopcprivatel1/form/InquiryForm/formperma/HyvqgErILmK-RGLlxZhGBqi2leGDhXEjXaAgyI5RegI",
   colors: {
     navy: "#173447",
     darkNavy: "#102B3C",

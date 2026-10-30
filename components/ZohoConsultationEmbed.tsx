@@ -22,17 +22,17 @@ interface ZohoConsultationEmbedProps {
 export default function ZohoConsultationEmbed({
   zohoUrl = BRAND.zohoFormUrl,
 }: ZohoConsultationEmbedProps) {
-  // Check if URL is an internal Zoho admin/dashboard link (which cannot be iframed due to Zoho security)
-  const isDashboardUrl =
-    !zohoUrl ||
-    zohoUrl.includes("/home#") ||
-    zohoUrl.endsWith("/home") ||
-    !zohoUrl.includes("/form/");
+  // Never attempt to iframe external domains like debtsfree.in or Zoho internal dashboard links
+  // because browsers will block them with X-Frame-Options: SAMEORIGIN.
+  // Use the verified public Zoho formperma embed link which has no X-Frame-Options restrictions.
+  const activeZohoUrl =
+    zohoUrl &&
+    zohoUrl.includes("zohopublic.in") &&
+    zohoUrl.includes("/formperma/")
+      ? zohoUrl
+      : "https://forms.zohopublic.in/rddslegalsolutionsopcprivatel1/form/InquiryForm/formperma/HyvqgErILmK-RGLlxZhGBqi2leGDhXEjXaAgyI5RegI";
 
-  // If it's a dashboard link, default to direct fast form so visitors never see a crashed iframe
-  const [activeTab, setActiveTab] = useState<"zoho" | "direct">(
-    isDashboardUrl ? "direct" : "zoho"
-  );
+  const [activeTab, setActiveTab] = useState<"zoho" | "direct">("zoho");
   const [iframeLoaded, setIframeLoaded] = useState(false);
 
   useEffect(() => {
@@ -94,7 +94,7 @@ export default function ZohoConsultationEmbed({
               </h3>
             </div>
             <a
-              href={zohoUrl}
+              href={activeZohoUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors self-start sm:self-auto"
@@ -103,91 +103,42 @@ export default function ZohoConsultationEmbed({
             </a>
           </div>
 
-          {/* If the URL is an internal dashboard link, Zoho blocks iframing */}
-          {isDashboardUrl ? (
-            <div className="p-8 bg-slate-50 text-center space-y-4">
-              <div className="max-w-md mx-auto p-4 bg-amber-50 border border-amber-200 rounded-xl text-left text-xs text-amber-900 space-y-2">
-                <div className="font-bold flex items-center gap-1.5 text-amber-800">
-                  <Info className="w-4 h-4 shrink-0" />
-                  <span>Zoho Public Share Link Required for In-Page Embed</span>
-                </div>
-                <p>
-                  The current URL (<code>{zohoUrl}</code>) is a Zoho internal account link. Zoho prevents internal account dashboards from being embedded inside iframes for security.
+          {/* Iframe with loading spinner */}
+          <div className="relative min-h-[680px] w-full bg-slate-50 flex flex-col">
+            {!iframeLoaded && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-white z-10 p-6 space-y-3">
+                <Loader2 className="w-8 h-8 animate-spin text-brand-emerald" />
+                <p className="text-sm font-medium text-brand-navy">
+                  Loading secure consultation form...
                 </p>
-                <div className="pt-1 font-semibold text-brand-navy">
-                  To embed directly inside this page:
-                </div>
-                <ol className="list-decimal pl-4 space-y-1 text-slate-700">
-                  <li>Open your form in Zoho Forms.</li>
-                  <li>Click the <strong>Share</strong> tab at the top.</li>
-                  <li>Copy the <strong>Public Link (formperma)</strong>.</li>
-                  <li>Paste it in <strong>Admin Portal &rarr; Site Settings</strong>.</li>
-                </ol>
+                <p className="text-xs text-slate-400 text-center max-w-sm">
+                  Powered by Zoho Enterprise CRM. If the form does not appear, you can also use our direct fast form above.
+                </p>
               </div>
+            )}
+            <iframe
+              src={activeZohoUrl}
+              title="Settle Loan Expert Confidential Debt Consultation"
+              className="w-full h-[780px] border-0"
+              onLoad={() => setIframeLoaded(true)}
+              allow="camera; microphone; geolocation"
+            />
+          </div>
 
-              <div className="pt-2">
-                <a
-                  href={zohoUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-brand-navy text-white text-xs sm:text-sm font-bold hover:bg-brand-navy-900 transition-colors shadow-sm"
-                >
-                  <span>Open Zoho Form in New Tab</span>
-                  <ExternalLink className="w-4 h-4" />
-                </a>
-              </div>
-
-              <div className="pt-6 border-t border-slate-200 max-w-xl mx-auto">
-                <div className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">
-                  Or submit directly using our integrated fast form below:
-                </div>
-                <EnquiryForm
-                  title="Direct Fast-Track Debt Evaluation"
-                  subtitle="Submit your details below and immediately proceed to consultation confirmation & Razorpay."
-                  source="direct_eval_form"
-                />
-              </div>
-            </div>
-          ) : (
-            <>
-              {/* Iframe with loading spinner */}
-              <div className="relative min-h-[680px] w-full bg-slate-50 flex flex-col">
-                {!iframeLoaded && (
-                  <div className="absolute inset-0 flex flex-col items-center justify-center bg-white z-10 p-6 space-y-3">
-                    <Loader2 className="w-8 h-8 animate-spin text-brand-emerald" />
-                    <p className="text-sm font-medium text-brand-navy">
-                      Loading secure consultation form...
-                    </p>
-                    <p className="text-xs text-slate-400 text-center max-w-sm">
-                      Powered by Zoho Enterprise CRM. If the form does not appear, you can also use our direct fast form above.
-                    </p>
-                  </div>
-                )}
-                <iframe
-                  src={zohoUrl}
-                  title="Settle Loan Expert Confidential Debt Consultation"
-                  className="w-full h-[760px] border-0"
-                  onLoad={() => setIframeLoaded(true)}
-                  allow="camera; microphone; geolocation"
-                />
-              </div>
-
-              {/* Post-submission Razorpay guidance */}
-              <div className="py-3 px-6 bg-emerald-50/70 border-t border-emerald-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-emerald-900">
-                <span className="flex items-center gap-2 font-medium">
-                  <Zap className="w-4 h-4 text-amber-500 fill-amber-500 shrink-0" />
-                  <span>Finished submitting your Zoho form? Verify priority advisory booking below.</span>
-                </span>
-                <Link
-                  href="/consultation-payment"
-                  className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-brand-emerald text-white font-bold hover:bg-brand-emerald-dark transition-colors shrink-0 shadow-sm"
-                >
-                  <span>Proceed to Payment &amp; Confirmation</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              </div>
-            </>
-          )}
+          {/* Post-submission Razorpay guidance */}
+          <div className="py-3 px-6 bg-emerald-50/70 border-t border-emerald-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-emerald-900">
+            <span className="flex items-center gap-2 font-medium">
+              <Zap className="w-4 h-4 text-amber-500 fill-amber-500 shrink-0" />
+              <span>Finished submitting your Zoho form? Verify priority advisory booking below.</span>
+            </span>
+            <Link
+              href="/consultation-payment"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-brand-emerald text-white font-bold hover:bg-brand-emerald-dark transition-colors shrink-0 shadow-sm"
+            >
+              <span>Proceed to Payment &amp; Confirmation</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
         </div>
       ) : (
         <div className="max-w-2xl mx-auto">

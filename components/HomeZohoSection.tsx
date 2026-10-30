@@ -12,6 +12,13 @@ interface HomeZohoSectionProps {
 export default function HomeZohoSection({
   zohoUrl = BRAND.zohoFormUrl,
 }: HomeZohoSectionProps) {
+  const activeZohoUrl =
+    zohoUrl &&
+    zohoUrl.includes("zohopublic.in") &&
+    zohoUrl.includes("/formperma/")
+      ? zohoUrl
+      : "https://forms.zohopublic.in/rddslegalsolutionsopcprivatel1/form/InquiryForm/formperma/HyvqgErILmK-RGLlxZhGBqi2leGDhXEjXaAgyI5RegI";
+
   const [iframeLoaded, setIframeLoaded] = useState(false);
 
   useEffect(() => {
@@ -47,7 +54,7 @@ export default function HomeZohoSection({
         </div>
 
         <a
-          href={zohoUrl}
+          href={activeZohoUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors self-start sm:self-auto shrink-0"
@@ -71,7 +78,7 @@ export default function HomeZohoSection({
           </div>
         )}
         <iframe
-          src={zohoUrl}
+          src={activeZohoUrl}
           title="Settle Loan Expert Confidential Debt Consultation"
           className="w-full h-[780px] border-0"
           onLoad={() => setIframeLoaded(true)}
