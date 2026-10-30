@@ -13,6 +13,7 @@ import {
   Lock,
   ArrowRight,
   HeartHandshake,
+  BadgeCheck,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -137,6 +138,67 @@ export default function AboutPage() {
                 official letterhead before any settlement payment is made, ensuring no
                 ambiguity or residual claims.
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Legal Leadership & Editorial Standards */}
+        <div id="editorial-board" className="bg-white rounded-2xl p-8 sm:p-10 border border-brand-border shadow-card space-y-8">
+          <div className="text-center max-w-2xl mx-auto space-y-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-emerald">
+              Legal Leadership &amp; Advisory Panel
+            </span>
+            <h3 className="text-xl sm:text-2xl font-bold text-brand-navy">
+              Experienced Minds Behind Our Debt Resolution Practice
+            </h3>
+            <p className="text-xs sm:text-sm text-brand-text">
+              Our advice is authored and vetted by legal professionals who understand both banking statutes and the human cost of debt distress.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-6 rounded-xl bg-brand-surface border border-brand-border/70 space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-xl bg-brand-mint text-brand-emerald flex items-center justify-center font-bold text-xl shrink-0 border border-brand-border">
+                  RV
+                </div>
+                <div>
+                  <h4 className="text-base font-bold text-brand-navy">Adv. Rajesh Verma</h4>
+                  <p className="text-xs text-brand-emerald font-semibold">
+                    Senior Banking Law Advocate &bull; B.A. LL.B.
+                  </p>
+                  <span className="text-[11px] text-slate-500">Bar Council of Delhi &bull; 14+ Years Advisory</span>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-brand-text leading-relaxed">
+                Specialist in RBI Fair Practices Code enforcement, SARFAESI Act borrower defense, and institutional One-Time Settlement (OTS) negotiations. Adv. Verma has advised over 3,500 debtors in securing legal immunity against unfair collection harassment.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-xl bg-brand-surface border border-brand-border/70 space-y-4">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 rounded-xl bg-blue-50 text-brand-navy flex items-center justify-center font-bold text-xl shrink-0 border border-blue-200">
+                  EB
+                </div>
+                <div>
+                  <h4 className="text-base font-bold text-brand-navy">Editorial &amp; Legal Review Board</h4>
+                  <p className="text-xs text-brand-emerald font-semibold">
+                    Fact-Checking &amp; Regulatory Verification
+                  </p>
+                  <span className="text-[11px] text-slate-500">RBI Master Directions &amp; Consumer Protection</span>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-brand-text leading-relaxed">
+                Our multidisciplinary review team includes former banking collection managers and consumer finance researchers who verify all published advisory guides against the latest RBI circulars and judicial precedents.
+              </p>
+              <div className="pt-2">
+                <Link
+                  href="/editorial-policy"
+                  className="text-xs font-bold text-brand-emerald hover:underline inline-flex items-center gap-1"
+                >
+                  Read Our Editorial Standards &rarr;
+                </Link>
+              </div>
             </div>
           </div>
         </div>

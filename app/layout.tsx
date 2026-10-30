@@ -39,7 +39,12 @@ export const metadata: Metadata = {
     "debt restructuring India",
     "Settle Loan Expert",
   ],
-  authors: [{ name: "Settle Loan Expert Advisory Team" }],
+  authors: [
+    {
+      name: "Adv. Rajesh Verma, Senior Banking Law Counsel",
+      url: "https://settleloanexpert.in/about",
+    },
+  ],
   creator: "Settle Loan Expert",
   publisher: "Settle Loan Expert Advisory Services",
   formatDetection: {
@@ -133,6 +138,20 @@ export default function RootLayout({
       "@type": "Country",
       name: "India",
     },
+    publishingPrinciples: "https://settleloanexpert.in/editorial-policy",
+    founder: {
+      "@type": "Person",
+      name: "Adv. Rajesh Verma",
+      jobTitle: "Senior Banking Law & Debt Settlement Counsel",
+      description:
+        "Veteran legal advisor in Indian banking regulations, RBI Fair Practices Code, and debt resolution with over 14 years of professional experience.",
+      knowsAbout: [
+        "RBI Fair Practices Code",
+        "Debt Settlement",
+        "Banking Ombudsman Scheme",
+        "One-Time Settlement (OTS)",
+      ],
+    },
   };
 
   return (
@@ -144,6 +163,13 @@ export default function RootLayout({
           name="robots"
           content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
         />
+        <meta name="author" content="Adv. Rajesh Verma, Senior Banking Law Counsel" />
+        <meta name="date" content="2026-10-30" />
+        <meta name="article:published_time" content="2024-01-15T09:00:00+05:30" />
+        <meta name="article:modified_time" content="2026-10-30T10:00:00+05:30" />
+        <meta property="article:published_time" content="2024-01-15T09:00:00+05:30" />
+        <meta property="article:modified_time" content="2026-10-30T10:00:00+05:30" />
+        <meta property="og:updated_time" content="2026-10-30T10:00:00+05:30" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

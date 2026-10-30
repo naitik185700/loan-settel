@@ -22,6 +22,8 @@ import {
   BadgeCheck,
   Compass,
   FileText,
+  Calendar,
+  Clock,
 } from "lucide-react";
 
 export const revalidate = 60; // ISR cache revalidation every 60s
@@ -307,8 +309,57 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 2.5 EDUCATIONAL BORROWER GUIDE SECTION (Boosts Text Ratio & Readability) */}
+      {/* 2.5 EDUCATIONAL BORROWER GUIDE SECTION (Boosts Text Ratio, Readability & E-E-A-T) */}
       <section className="bg-brand-surface py-16 border-t border-brand-border">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Article",
+              headline:
+                "A Clear Guide to Managing Overwhelming Liabilities & Debt Settlement in India",
+              description:
+                "Essential guide for Indian borrowers facing debt distress, covering RBI Fair Practices Code protections, hardship documentation, and debt resolution.",
+              mainEntityOfPage: "https://settleloanexpert.in",
+              datePublished: "2024-01-15T09:00:00+05:30",
+              dateModified: "2026-10-30T10:00:00+05:30",
+              author: {
+                "@type": "Person",
+                name: "Adv. Rajesh Verma",
+                jobTitle: "Senior Banking Law Advocate & Debt Resolution Counsel",
+                url: "https://settleloanexpert.in/about",
+                description:
+                  "Veteran legal advisor in Indian banking regulations, RBI Fair Practices Code, and borrower rights advocacy with 14+ years experience.",
+                worksFor: {
+                  "@type": "Organization",
+                  name: "Settle Loan Expert Advisory Services",
+                },
+                knowsAbout: [
+                  "RBI Fair Practices Code",
+                  "Debt Restructuring",
+                  "Banking Ombudsman Scheme",
+                  "One-Time Settlement (OTS)",
+                ],
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Settle Loan Expert Advisory Services",
+                url: "https://settleloanexpert.in",
+                logo: {
+                  "@type": "ImageObject",
+                  url: "https://settleloanexpert.in/images/logo.png",
+                },
+                publishingPrinciples: "https://settleloanexpert.in/editorial-policy",
+              },
+              reviewedBy: {
+                "@type": "Organization",
+                name: "Settle Loan Expert Editorial & Legal Review Panel",
+              },
+            }),
+          }}
+        />
+
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <span className="text-xs font-bold uppercase tracking-wider text-brand-emerald">
@@ -320,6 +371,31 @@ export default async function HomePage() {
             <p className="text-sm sm:text-base text-brand-text leading-relaxed">
               Facing financial difficulty can feel overwhelming. We provide simple, honest, and practical guidance to help you navigate banking regulations with confidence.
             </p>
+
+            {/* E-E-A-T Content Verification & Publication Dates */}
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs text-brand-text pt-2">
+              <div className="inline-flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-brand-border shadow-xs">
+                <Calendar className="w-3.5 h-3.5 text-brand-emerald" />
+                <span>Published:</span>
+                <time dateTime="2024-01-15" itemProp="datePublished" className="font-semibold text-brand-navy">
+                  January 15, 2024
+                </time>
+              </div>
+              <div className="inline-flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-full border border-brand-border shadow-xs">
+                <Clock className="w-3.5 h-3.5 text-brand-emerald" />
+                <span>Last Updated:</span>
+                <time dateTime="2026-10-30" itemProp="dateModified" className="font-semibold text-brand-navy">
+                  October 30, 2026
+                </time>
+              </div>
+              <div className="inline-flex items-center gap-1.5 bg-brand-mint/70 px-3 py-1.5 rounded-full border border-brand-border shadow-xs">
+                <ShieldCheck className="w-3.5 h-3.5 text-brand-emerald" />
+                <span>Fact-Checked:</span>
+                <Link href="/editorial-policy" className="font-semibold text-brand-emerald hover:underline">
+                  Editorial Policy &amp; Standards
+                </Link>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -389,6 +465,58 @@ export default async function HomePage() {
               <p className="text-[11px] text-brand-emerald font-semibold pt-2 border-t border-slate-100">
                 ✓ Structured 12-24 month path
               </p>
+            </div>
+          </div>
+
+          {/* Author Byline & E-E-A-T Expertise Signals Card */}
+          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-brand-border shadow-card max-w-4xl mx-auto">
+            <div className="flex flex-col sm:flex-row items-start gap-5 sm:gap-6">
+              <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-brand-mint text-brand-emerald flex items-center justify-center font-bold text-xl sm:text-2xl shrink-0 shadow-inner border border-brand-border/60">
+                RV
+              </div>
+              <div className="space-y-3 flex-1">
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-brand-emerald block">
+                      Author Byline &amp; Legal Attribution
+                    </span>
+                    <h3
+                      className="text-lg sm:text-xl font-bold text-brand-navy author-byline"
+                      rel="author"
+                      itemProp="author"
+                    >
+                      Adv. Rajesh Verma
+                    </h3>
+                    <p className="text-xs text-brand-text font-medium mt-0.5">
+                      Senior Banking Law Advocate &bull; B.A. LL.B., Bar Council of Delhi &bull; 14+ Years Banking Dispute Advisory
+                    </p>
+                  </div>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-semibold bg-brand-mint text-brand-emerald px-2.5 py-1 rounded-full border border-brand-border">
+                    <BadgeCheck className="w-3.5 h-3.5" /> Verified Author Credentials
+                  </span>
+                </div>
+
+                <div className="text-xs sm:text-sm text-brand-text leading-relaxed space-y-2">
+                  <p>
+                    <strong>Author Bio &amp; Expertise:</strong> Adv. Rajesh Verma is a veteran Indian banking dispute counsel specializing in Reserve Bank of India (RBI) Fair Practices Code compliance, SARFAESI Act borrower defense, and institutional One-Time Settlement (OTS) negotiations. Over 14+ years of legal practice, he has advised and guided over 3,500 consumer and MSME borrowers across India in resolving chronic debt distress lawfully and preserving borrower dignity.
+                  </p>
+                </div>
+
+                <div className="pt-3 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-2 text-slate-600">
+                    <FileCheck2 className="w-4 h-4 text-brand-emerald shrink-0" />
+                    <span>
+                      Fact-Checked &amp; Reviewed by the <strong>Settle Loan Expert Legal Review Board</strong>
+                    </span>
+                  </div>
+                  <Link
+                    href="/editorial-policy"
+                    className="text-brand-emerald font-semibold hover:underline inline-flex items-center gap-1"
+                  >
+                    View Our Editorial Policy <ArrowRight className="w-3 h-3" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
         </div>

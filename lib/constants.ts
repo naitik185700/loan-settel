@@ -79,6 +79,7 @@ export const FOOTER_COMPANY = [
   { name: "How Our Process Works", href: "/how-it-works" },
   { name: "Frequently Asked Questions", href: "/faqs" },
   { name: "Financial Knowledgebase", href: "/blog" },
+  { name: "Editorial Policy", href: "/editorial-policy" },
   { name: "Contact Our Advisors", href: "/contact" },
   { name: "Grievance Redressal", href: "/grievance-redressal" },
 ];
@@ -86,6 +87,7 @@ export const FOOTER_COMPANY = [
 export const FOOTER_LEGAL = [
   { name: "Privacy Policy", href: "/privacy-policy" },
   { name: "Terms & Conditions", href: "/terms-and-conditions" },
+  { name: "Editorial Policy", href: "/editorial-policy" },
   { name: "Legal Disclaimer", href: "/disclaimer" },
   { name: "Anti-Harassment Rights", href: "/blog/rbi-fair-practices-code-borrower-rights" },
   { name: "Grievance Officer", href: "/grievance-redressal" },
