@@ -115,7 +115,10 @@ function ConsultationPaymentContent() {
 
       // 2. Open Razorpay Checkout Modal
       const options = {
-        key: orderData.keyId,
+        key:
+          orderData.keyId ||
+          process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ||
+          "rzp_live_Tu2BL8LftIdey0",
         amount: orderData.amount,
         currency: orderData.currency || "INR",
         name: BRAND.name,

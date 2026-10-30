@@ -1,8 +1,11 @@
 import crypto from "crypto";
 
 const key_id =
-  process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || "";
-const key_secret = process.env.RAZORPAY_KEY_SECRET || "";
+  process.env.RAZORPAY_KEY_ID ||
+  process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID ||
+  "rzp_live_Tu2BL8LftIdey0";
+const key_secret =
+  process.env.RAZORPAY_KEY_SECRET || "P5QWD23B1uSi8ZuMuB8u595o";
 
 export const CONSULTATION_FEE_INR = parseInt(
   process.env.NEXT_PUBLIC_CONSULTATION_FEE || "499",
