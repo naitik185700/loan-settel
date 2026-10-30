@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     template: "%s | Settle Loan Expert",
   },
   description:
-    "Confidential debt settlement, credit card relief, and borrower legal protection under RBI guidelines in India. Resolve your debt and regain control.",
+    "Confidential debt resolution, credit card relief, and borrower protection under RBI guidelines in India. Regain financial stability.",
   keywords: [
     "loan settlement India",
     "credit card debt settlement",

@@ -305,6 +305,93 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* 2.5 EDUCATIONAL BORROWER GUIDE SECTION (Boosts Text Ratio & Readability) */}
+      <section className="bg-brand-surface py-16 border-t border-brand-border">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-3">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-emerald">
+              Borrower Education &amp; Legal Literacy
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-heading">
+              A Clear Guide to Managing Overwhelming Liabilities
+            </h2>
+            <p className="text-sm sm:text-base text-brand-text leading-relaxed">
+              Facing financial difficulty can feel overwhelming. We provide simple, honest, and practical guidance to help you navigate banking regulations with confidence.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white p-6 rounded-2xl border border-brand-border space-y-3 shadow-sm flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-brand-mint text-brand-emerald flex items-center justify-center font-bold">
+                  <ShieldCheck className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-brand-navy">
+                  Your Rights as a Customer
+                </h3>
+                <p className="text-xs text-brand-text leading-relaxed">
+                  Under the Reserve Bank of India Fair Practices Code, every customer has legal safeguards. Recovery personnel cannot contact you before 8 AM or after 7 PM. They must present proper identification and treat your family with respect at all times.
+                </p>
+              </div>
+              <p className="text-[11px] text-brand-emerald font-semibold pt-2 border-t border-slate-100">
+                ✓ Protected under RBI guidelines
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-brand-border space-y-3 shadow-sm flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-brand-mint text-brand-emerald flex items-center justify-center font-bold">
+                  <FileText className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-brand-navy">
+                  How Hardship Reviews Work
+                </h3>
+                <p className="text-xs text-brand-text leading-relaxed">
+                  Banks recognize that genuine life challenges occur. Sudden job losses, medical emergencies, or family crises affect cash flow. During our review, we assist you in gathering genuine documentation so lenders can evaluate your case fairly.
+                </p>
+              </div>
+              <p className="text-[11px] text-brand-emerald font-semibold pt-2 border-t border-slate-100">
+                ✓ Documented hardship review
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-brand-border space-y-3 shadow-sm flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-brand-mint text-brand-emerald flex items-center justify-center font-bold">
+                  <Scale className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-brand-navy">
+                  Evaluating Your Alternatives
+                </h3>
+                <p className="text-xs text-brand-text leading-relaxed">
+                  Full repayment is always the primary recommendation when cash flow allows. If repayment is impossible, alternatives include tenure extensions, interest restructuring, or a negotiated one-time compromise to permanently end legal exposure.
+                </p>
+              </div>
+              <p className="text-[11px] text-brand-emerald font-semibold pt-2 border-t border-slate-100">
+                ✓ Objective options comparison
+              </p>
+            </div>
+
+            <div className="bg-white p-6 rounded-2xl border border-brand-border space-y-3 shadow-sm flex flex-col justify-between">
+              <div className="space-y-3">
+                <div className="w-10 h-10 rounded-xl bg-brand-mint text-brand-emerald flex items-center justify-center font-bold">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+                <h3 className="text-base font-bold text-brand-navy">
+                  Rebuilding Credit Steadily
+                </h3>
+                <p className="text-xs text-brand-text leading-relaxed">
+                  Resolving delinquent accounts stops late fees and legal notices immediately. Once an official No Objection Certificate is issued by the institution, you can begin rebuilding your credit score step by step through responsible habits.
+                </p>
+              </div>
+              <p className="text-[11px] text-brand-emerald font-semibold pt-2 border-t border-slate-100">
+                ✓ Structured 12-24 month path
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* 3. HOW IT WORKS */}
       <section className="bg-white py-16 border-y border-brand-border">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -415,9 +502,9 @@ export default async function HomePage() {
                   <BadgeCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-brand-navy">
+                  <h3 className="text-sm font-bold text-brand-navy">
                     Clear & Honest Communication
-                  </h4>
+                  </h3>
                   <p className="text-xs text-brand-text mt-0.5 leading-relaxed">
                     No misleading promises of 100% debt erasure or magical CIBIL fixes. We give you realistic expectations based on banking practices.
                   </p>
@@ -429,9 +516,9 @@ export default async function HomePage() {
                   <FileText className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-brand-navy">
+                  <h3 className="text-sm font-bold text-brand-navy">
                     Transparent Service Structure
-                  </h4>
+                  </h3>
                   <p className="text-xs text-brand-text mt-0.5 leading-relaxed">
                     Upfront clarity on advisory scope and fees. No hidden percentage commissions or undisclosed charges.
                   </p>
@@ -443,9 +530,9 @@ export default async function HomePage() {
                   <Lock className="w-5 h-5" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-brand-navy">
+                  <h3 className="text-sm font-bold text-brand-navy">
                     Strict Confidentiality & Data Security
-                  </h4>
+                  </h3>
                   <p className="text-xs text-brand-text mt-0.5 leading-relaxed">
                     Your personal information, loan balances, and discussions remain entirely confidential and encrypted.
                   </p>
@@ -457,9 +544,9 @@ export default async function HomePage() {
                   <PhoneCall className="w-4 h-4" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-brand-navy">
+                  <h3 className="text-sm font-bold text-brand-navy">
                     Assistance Throughout the Settlement Process
-                  </h4>
+                  </h3>
                   <p className="text-xs text-brand-text mt-0.5 leading-relaxed">
                     From documentation review to verifying the final bank No Objection Certificate (NOC), our team supports you every step.
                   </p>
