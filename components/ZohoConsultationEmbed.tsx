@@ -32,7 +32,8 @@ export default function ZohoConsultationEmbed({
       ? zohoUrl
       : "https://forms.zohopublic.in/rddslegalsolutionsopcprivatel1/form/InquiryForm/formperma/HyvqgErILmK-RGLlxZhGBqi2leGDhXEjXaAgyI5RegI";
 
-  const [activeTab, setActiveTab] = useState<"zoho" | "direct">("zoho");
+  // Default to direct fast form so visitors always see a fast, beautiful, working form
+  const [activeTab, setActiveTab] = useState<"zoho" | "direct">("direct");
   const [iframeLoaded, setIframeLoaded] = useState(false);
 
   useEffect(() => {
@@ -56,17 +57,6 @@ export default function ZohoConsultationEmbed({
       <div className="flex justify-center mb-6">
         <div className="inline-flex p-1.5 bg-brand-surface rounded-xl border border-brand-border shadow-sm">
           <button
-            onClick={() => setActiveTab("zoho")}
-            className={`px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
-              activeTab === "zoho"
-                ? "bg-brand-navy text-white shadow-sm"
-                : "text-brand-text hover:text-brand-navy"
-            }`}
-          >
-            <Sparkles className="w-4 h-4 text-brand-emerald" />
-            Zoho Form Embed
-          </button>
-          <button
             onClick={() => setActiveTab("direct")}
             className={`px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
               activeTab === "direct"
@@ -76,6 +66,17 @@ export default function ZohoConsultationEmbed({
           >
             <PhoneCall className="w-4 h-4 text-brand-emerald" />
             Fast Evaluation Form
+          </button>
+          <button
+            onClick={() => setActiveTab("zoho")}
+            className={`px-5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-all flex items-center gap-2 ${
+              activeTab === "zoho"
+                ? "bg-brand-navy text-white shadow-sm"
+                : "text-brand-text hover:text-brand-navy"
+            }`}
+          >
+            <Sparkles className="w-4 h-4 text-brand-emerald" />
+            Zoho Form Embed
           </button>
         </div>
       </div>
