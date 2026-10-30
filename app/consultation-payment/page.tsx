@@ -121,7 +121,7 @@ function ConsultationPaymentContent() {
           "rzp_live_Tu2BL8LftIdey0",
         amount: orderData.amount,
         currency: orderData.currency || "INR",
-        name: BRAND.name,
+        name: "Settle Loan Expert (Debts Free)",
         description: "Priority 1-on-1 Debt Settlement Advisory",
         image: "/images/logo.png",
         order_id: orderData.orderId,
@@ -557,9 +557,14 @@ function ConsultationPaymentContent() {
                         </>
                       )}
                     </button>
-                    <div className="text-[10px] text-center text-slate-500 mt-2 flex items-center justify-center gap-1">
-                      <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                      <span>Razorpay Secure 256-Bit SSL • UPI, Cards, NetBanking</span>
+                    <div className="text-[10px] text-center text-slate-500 mt-2 flex flex-col items-center justify-center gap-0.5">
+                      <div className="flex items-center gap-1">
+                        <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                        <span>Razorpay 256-Bit SSL • UPI, Cards, NetBanking</span>
+                      </div>
+                      <span className="text-[9px] text-slate-400">
+                        Official gateway partner: <strong>Debts Free</strong>
+                      </span>
                     </div>
                   </div>
                 </div>
