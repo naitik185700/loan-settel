@@ -72,7 +72,7 @@ export default function HomeZohoSection({
               Loading secure evaluation form...
             </p>
             <p className="text-xs text-slate-400 text-center max-w-sm">
-              Please wait while the official Zoho consultation form loads.
+              Please wait while the official case evaluation form loads.
             </p>
           </div>
         )}

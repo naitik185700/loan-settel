@@ -385,7 +385,7 @@ function ConsultationPaymentContent() {
                 <FileCheck2 className="w-10 h-10" />
               </div>
               <span className="inline-block px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 mb-2">
-                Query Logged in Zoho CRM
+                Case Query Logged Successfully
               </span>
               <h1 className="text-2xl sm:text-3xl font-extrabold">
                 Your Consultation Query is Received
@@ -447,13 +447,13 @@ function ConsultationPaymentContent() {
             <div className="bg-brand-navy text-white p-6 sm:p-8 border-b border-brand-navy-800">
               <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-emerald-light mb-1">
                 <CheckCircle2 className="w-4 h-4 text-brand-emerald" />
-                Step 1 Complete: Zoho Form Submitted
+                Step 1 Complete: Inquiry Details Submitted
               </div>
               <h1 className="text-2xl sm:text-3xl font-extrabold text-white">
                 Thank You! Your Details Have Been Saved
               </h1>
               <p className="text-slate-300 text-xs sm:text-sm mt-2 leading-relaxed">
-                Your initial consultation enquiry is collected in our Zoho CRM. Choose below how you would like to proceed with your debt evaluation.
+                Your initial consultation inquiry is safely recorded. Choose below how you would like to proceed with your debt evaluation.
               </p>
             </div>
 
@@ -582,7 +582,7 @@ function ConsultationPaymentContent() {
                     <ul className="mt-4 space-y-2 text-xs text-slate-600">
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
-                        <span>Data saved directly in our Zoho CRM enquiry list.</span>
+                        <span>Data saved directly in our secure advisory enquiry list.</span>
                       </li>
                       <li className="flex items-start gap-2">
                         <CheckCircle2 className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
