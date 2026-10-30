@@ -38,6 +38,11 @@ model Lead {
   followUpDate      DateTime?
   ipAddress         String?
   userAgent         String?
+  paymentStatus     String       @default("UNPAID")
+  paymentAmount     Int?
+  razorpayOrderId   String?
+  razorpayPaymentId String?
+  paidAt            DateTime?
   notes             LeadNote[]
   createdAt         DateTime     @default(now())
   updatedAt         DateTime     @updatedAt

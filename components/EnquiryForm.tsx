@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import {
   CheckCircle2,
   AlertCircle,
@@ -8,6 +9,8 @@ import {
   ShieldCheck,
   Send,
   HelpCircle,
+  Zap,
+  ArrowRight,
 } from "lucide-react";
 import { BRAND } from "@/lib/constants";
 
@@ -116,6 +119,18 @@ export default function EnquiryForm({
                 <li>Exploration of viable one-time settlement or restructuring paths.</li>
               </ul>
             </div>
+
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Link
+                href={`/consultation-payment?leadId=${leadId}&name=${encodeURIComponent(formData.fullName)}&mobile=${encodeURIComponent(formData.mobile)}&email=${encodeURIComponent(formData.email)}&loanCategory=${encodeURIComponent(formData.loanCategory)}&amount=${encodeURIComponent(formData.outstandingAmount)}`}
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-brand-emerald text-white text-xs sm:text-sm font-bold rounded-xl hover:bg-brand-emerald-dark transition-all shadow-sm"
+              >
+                <Zap className="w-4 h-4 text-amber-300 fill-amber-300" />
+                <span>Fast-Track with Priority Callback (Razorpay)</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+
             <button
               onClick={() => {
                 setSuccess(false);
@@ -130,9 +145,9 @@ export default function EnquiryForm({
                   consentGiven: true,
                 });
               }}
-              className="mt-4 px-6 py-2.5 bg-brand-navy text-white text-sm font-semibold rounded-lg hover:bg-brand-navy-dark transition-colors"
+              className="mt-2 text-xs text-brand-muted hover:text-brand-navy transition-colors underline"
             >
-              Submit Another Enquiry
+              Submit Another Free Enquiry
             </button>
           </div>
         ) : (

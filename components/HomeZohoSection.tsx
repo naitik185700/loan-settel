@@ -1,16 +1,33 @@
 "use client";
 
-import React, { useState } from "react";
-import { ShieldCheck, Loader2, ExternalLink } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { ShieldCheck, Loader2, ExternalLink, ArrowRight, Zap } from "lucide-react";
+import { BRAND } from "@/lib/constants";
 
 interface HomeZohoSectionProps {
   zohoUrl?: string;
 }
 
 export default function HomeZohoSection({
-  zohoUrl = "https://forms.zohopublic.in/rddslegalsolutionsopcprivatel1/form/InquiryForm/formperma/HyvqgErILmK-RGLlxZhGBqi2leGDhXEjXaAgyI5RegI",
+  zohoUrl = BRAND.zohoFormUrl,
 }: HomeZohoSectionProps) {
   const [iframeLoaded, setIframeLoaded] = useState(false);
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (
+        typeof event.data === "string" &&
+        (event.data.includes("submitted") ||
+          event.data.includes("form-submitted") ||
+          event.data.includes("zf_form_submitted"))
+      ) {
+        window.location.href = "/consultation-payment?source=zoho_home_embed";
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   return (
     <div className="bg-white rounded-2xl shadow-card border border-brand-border overflow-hidden">
@@ -60,6 +77,21 @@ export default function HomeZohoSection({
           onLoad={() => setIframeLoaded(true)}
           allow="camera; microphone; geolocation"
         />
+      </div>
+
+      {/* Post-submission Razorpay guidance */}
+      <div className="py-2.5 px-6 bg-emerald-50/60 border-t border-emerald-100 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-emerald-800">
+        <span className="flex items-center gap-1.5 font-medium">
+          <Zap className="w-4 h-4 text-amber-500 fill-amber-500 shrink-0" />
+          <span>Already submitted the form? Complete your priority consultation booking below.</span>
+        </span>
+        <Link
+          href="/consultation-payment"
+          className="inline-flex items-center gap-1 font-bold text-brand-emerald hover:underline shrink-0"
+        >
+          <span>Priority Payment &amp; Confirmation</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
 
       {/* Footer reassurance badges */}

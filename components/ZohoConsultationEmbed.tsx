@@ -1,18 +1,35 @@
 "use client";
 
-import React, { useState } from "react";
-import { ExternalLink, ShieldCheck, Loader2, Sparkles, PhoneCall } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import { ExternalLink, ShieldCheck, Loader2, Sparkles, PhoneCall, Zap, ArrowRight } from "lucide-react";
 import EnquiryForm from "./EnquiryForm";
+import { BRAND } from "@/lib/constants";
 
 interface ZohoConsultationEmbedProps {
   zohoUrl?: string;
 }
 
 export default function ZohoConsultationEmbed({
-  zohoUrl = "https://forms.zohopublic.in/rddslegalsolutionsopcprivatel1/form/InquiryForm/formperma/HyvqgErILmK-RGLlxZhGBqi2leGDhXEjXaAgyI5RegI",
+  zohoUrl = BRAND.zohoFormUrl,
 }: ZohoConsultationEmbedProps) {
   const [activeTab, setActiveTab] = useState<"zoho" | "direct">("zoho");
   const [iframeLoaded, setIframeLoaded] = useState(false);
+
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (
+        typeof event.data === "string" &&
+        (event.data.includes("submitted") ||
+          event.data.includes("form-submitted") ||
+          event.data.includes("zf_form_submitted"))
+      ) {
+        window.location.href = "/consultation-payment?source=zoho_embed";
+      }
+    };
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
 
   return (
     <div className="w-full">
@@ -87,6 +104,21 @@ export default function ZohoConsultationEmbed({
               onLoad={() => setIframeLoaded(true)}
               allow="camera; microphone; geolocation"
             />
+          </div>
+
+          {/* Post-submission Razorpay guidance */}
+          <div className="py-3 px-6 bg-emerald-50/70 border-t border-emerald-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-emerald-900">
+            <span className="flex items-center gap-2 font-medium">
+              <Zap className="w-4 h-4 text-amber-500 fill-amber-500 shrink-0" />
+              <span>Finished submitting your Zoho form? Verify priority advisory booking below.</span>
+            </span>
+            <Link
+              href="/consultation-payment"
+              className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-lg bg-brand-emerald text-white font-bold hover:bg-brand-emerald-dark transition-colors shrink-0 shadow-sm"
+            >
+              <span>Proceed to Payment &amp; Confirmation</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </div>
       ) : (

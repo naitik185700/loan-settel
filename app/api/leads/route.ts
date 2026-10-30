@@ -107,6 +107,7 @@ export async function GET(req: NextRequest) {
     const page = parseInt(searchParams.get("page") || "1", 10);
     const limit = parseInt(searchParams.get("limit") || "15", 10);
     const status = searchParams.get("status") || undefined;
+    const paymentStatus = searchParams.get("paymentStatus") || undefined;
     const search = searchParams.get("search") || undefined;
 
     const skip = (page - 1) * limit;
@@ -114,6 +115,9 @@ export async function GET(req: NextRequest) {
     const whereClause: any = {};
     if (status && status !== "ALL") {
       whereClause.status = status;
+    }
+    if (paymentStatus && paymentStatus !== "ALL") {
+      whereClause.paymentStatus = paymentStatus;
     }
     if (search) {
       whereClause.OR = [

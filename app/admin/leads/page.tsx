@@ -24,6 +24,7 @@ export default function LeadsManagementPage() {
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("ALL");
+  const [paymentStatusFilter, setPaymentStatusFilter] = useState("ALL");
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState<any>({ total: 0, totalPages: 1 });
   const [selectedLead, setSelectedLead] = useState<any>(null);
@@ -39,6 +40,7 @@ export default function LeadsManagementPage() {
       url.searchParams.set("page", page.toString());
       url.searchParams.set("limit", "15");
       if (statusFilter !== "ALL") url.searchParams.set("status", statusFilter);
+      if (paymentStatusFilter !== "ALL") url.searchParams.set("paymentStatus", paymentStatusFilter);
       if (search.trim()) url.searchParams.set("search", search.trim());
 
       const res = await fetch(url.toString());
@@ -56,7 +58,7 @@ export default function LeadsManagementPage() {
 
   useEffect(() => {
     fetchLeads();
-  }, [page, statusFilter]);
+  }, [page, statusFilter, paymentStatusFilter]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -156,28 +158,51 @@ export default function LeadsManagementPage() {
           </button>
         </form>
 
-        {/* Status Dropdown */}
-        <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-slate-400 shrink-0" />
-          <span className="text-xs font-semibold text-brand-navy shrink-0">
-            Status:
-          </span>
-          <select
-            value={statusFilter}
-            onChange={(e) => {
-              setStatusFilter(e.target.value);
-              setPage(1);
-            }}
-            className="text-xs border border-brand-border rounded-xl px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand-emerald"
-          >
-            <option value="ALL">All Statuses</option>
-            <option value="NEW">New (Uncontacted)</option>
-            <option value="CONTACTED">Contacted</option>
-            <option value="FOLLOW_UP">Follow-up Scheduled</option>
-            <option value="IN_PROGRESS">In Active Negotiation</option>
-            <option value="CONVERTED">Converted / Settled</option>
-            <option value="CLOSED">Closed / Ineligible</option>
-          </select>
+        {/* Filters Group */}
+        <div className="flex flex-wrap items-center gap-3">
+          {/* Status Dropdown */}
+          <div className="flex items-center gap-2">
+            <Filter className="w-4 h-4 text-slate-400 shrink-0" />
+            <span className="text-xs font-semibold text-brand-navy shrink-0">
+              Status:
+            </span>
+            <select
+              value={statusFilter}
+              onChange={(e) => {
+                setStatusFilter(e.target.value);
+                setPage(1);
+              }}
+              className="text-xs border border-brand-border rounded-xl px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand-emerald"
+            >
+              <option value="ALL">All Statuses</option>
+              <option value="NEW">New (Uncontacted)</option>
+              <option value="CONTACTED">Contacted</option>
+              <option value="FOLLOW_UP">Follow-up Scheduled</option>
+              <option value="IN_PROGRESS">In Active Negotiation</option>
+              <option value="CONVERTED">Converted / Settled</option>
+              <option value="CLOSED">Closed / Ineligible</option>
+            </select>
+          </div>
+
+          {/* Payment Status Dropdown */}
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-semibold text-brand-navy shrink-0">
+              Payment:
+            </span>
+            <select
+              value={paymentStatusFilter}
+              onChange={(e) => {
+                setPaymentStatusFilter(e.target.value);
+                setPage(1);
+              }}
+              className="text-xs border border-brand-border rounded-xl px-3 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-brand-emerald"
+            >
+              <option value="ALL">All Payments</option>
+              <option value="PAID">Paid Priority Leads (₹499)</option>
+              <option value="UNPAID">Free Queries (Unpaid)</option>
+              <option value="PENDING">Pending Payment</option>
+            </select>
+          </div>
         </div>
       </div>
 
@@ -191,8 +216,9 @@ export default function LeadsManagementPage() {
                 <th className="py-3.5 px-4">Contact</th>
                 <th className="py-3.5 px-4">Debt Type</th>
                 <th className="py-3.5 px-4">Estimated Balance</th>
-                <th className="py-3.5 px-4">Source</th>
+                <th className="py-3.5 px-4">Payment &amp; Priority</th>
                 <th className="py-3.5 px-4">Status</th>
+                <th className="py-3.5 px-4">Source</th>
                 <th className="py-3.5 px-4">Received</th>
                 <th className="py-3.5 px-4 text-right">Action</th>
               </tr>
@@ -200,13 +226,13 @@ export default function LeadsManagementPage() {
             <tbody className="divide-y divide-slate-100">
               {loading ? (
                 <tr>
-                  <td colSpan={8} className="py-12 text-center text-slate-400">
+                  <td colSpan={9} className="py-12 text-center text-slate-400">
                     <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-brand-emerald mx-auto"></div>
                   </td>
                 </tr>
               ) : leads.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-12 text-center text-slate-400">
+                  <td colSpan={9} className="py-12 text-center text-slate-400">
                     No enquiries match the current filters.
                   </td>
                 </tr>
@@ -236,8 +262,21 @@ export default function LeadsManagementPage() {
                     <td className="py-3.5 px-4 text-slate-600">
                       {lead.outstandingAmount || "Not specified"}
                     </td>
-                    <td className="py-3.5 px-4 text-[11px] text-slate-400">
-                      {lead.source}
+                    <td className="py-3.5 px-4">
+                      {lead.paymentStatus === "PAID" ? (
+                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full font-bold text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-200">
+                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                          ₹{lead.paymentAmount || 499} Paid (Priority)
+                        </span>
+                      ) : lead.paymentStatus === "PENDING" ? (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-medium text-[10px] bg-amber-100 text-amber-800">
+                          Payment Pending
+                        </span>
+                      ) : (
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full font-medium text-[10px] bg-slate-100 text-slate-600">
+                          Free Query (Unpaid)
+                        </span>
+                      )}
                     </td>
                     <td className="py-3.5 px-4">
                       <span
@@ -257,6 +296,9 @@ export default function LeadsManagementPage() {
                       >
                         {lead.status}
                       </span>
+                    </td>
+                    <td className="py-3.5 px-4 text-[11px] text-slate-400">
+                      {lead.source}
                     </td>
                     <td className="py-3.5 px-4 text-slate-400">
                       {new Date(lead.createdAt).toLocaleDateString("en-IN", {
@@ -365,6 +407,41 @@ export default function LeadsManagementPage() {
                   <div className="font-bold text-brand-navy mt-0.5">
                     {selectedLead.outstandingAmount || "Not specified"}
                   </div>
+                </div>
+              </div>
+
+              {/* Payment Status Box */}
+              <div className="p-4 bg-slate-50 rounded-xl border border-brand-border text-xs space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-bold text-brand-navy uppercase tracking-wider text-[11px]">
+                    Razorpay Gateway Status
+                  </span>
+                  {selectedLead.paymentStatus === "PAID" ? (
+                    <span className="px-2.5 py-0.5 rounded-full font-bold text-[10px] bg-emerald-100 text-emerald-800 border border-emerald-200">
+                      ₹{selectedLead.paymentAmount || 499} PAID (Priority Lead)
+                    </span>
+                  ) : selectedLead.paymentStatus === "PENDING" ? (
+                    <span className="px-2.5 py-0.5 rounded-full font-medium text-[10px] bg-amber-100 text-amber-800 border border-amber-200">
+                      Payment Initiated (Pending)
+                    </span>
+                  ) : (
+                    <span className="px-2.5 py-0.5 rounded-full font-medium text-[10px] bg-slate-100 text-slate-700 border border-slate-200">
+                      Free Standard Query (Unpaid)
+                    </span>
+                  )}
+                </div>
+                {selectedLead.razorpayPaymentId && (
+                  <div className="text-[11px] font-mono text-slate-600 pt-1">
+                    Razorpay ID: <span className="font-bold text-slate-800">{selectedLead.razorpayPaymentId}</span>
+                  </div>
+                )}
+                {selectedLead.paidAt && (
+                  <div className="text-[11px] text-slate-500">
+                    Paid On: {new Date(selectedLead.paidAt).toLocaleString("en-IN")}
+                  </div>
+                )}
+                <div className="text-[10px] text-slate-400">
+                  Source: {selectedLead.source} • Consent: {selectedLead.consentGiven ? "Verified" : "Pending"}
                 </div>
               </div>
 
