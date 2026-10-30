@@ -71,8 +71,12 @@ export default function EnquiryForm({
         throw new Error(data.error || "Failed to submit enquiry.");
       }
 
-      setLeadId(data.leadId || "SLE-" + Math.floor(100000 + Math.random() * 900000));
+      const newLeadId =
+        data.leadId || "SLE-" + Math.floor(100000 + Math.random() * 900000);
+      setLeadId(newLeadId);
       setSuccess(true);
+      // Automatically redirect immediately to consultation payment & confirmation portal
+      window.location.href = `/consultation-payment?leadId=${encodeURIComponent(newLeadId)}&name=${encodeURIComponent(formData.fullName)}&mobile=${encodeURIComponent(formData.mobile)}&email=${encodeURIComponent(formData.email)}&loanCategory=${encodeURIComponent(formData.loanCategory)}&amount=${encodeURIComponent(formData.outstandingAmount)}`;
     } catch (err: any) {
       setError(err.message || "An unexpected error occurred. Please try again.");
     } finally {

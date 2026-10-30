@@ -26,6 +26,21 @@ declare global {
   }
 }
 
+// Dynamic Razorpay script loader
+const loadRazorpayCheckoutScript = (): Promise<boolean> => {
+  return new Promise((resolve) => {
+    if (typeof window !== "undefined" && (window as any).Razorpay) {
+      return resolve(true);
+    }
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
+
 function ConsultationPaymentContent() {
   const searchParams = useSearchParams();
 
@@ -190,52 +205,32 @@ function ConsultationPaymentContent() {
         },
       };
 
-      if (typeof window !== "undefined" && window.Razorpay) {
-        const rzp = new window.Razorpay(options);
-        rzp.on("payment.failed", async function (response: any) {
-          console.error("Payment Failed:", response.error);
-          await fetch("/api/payment/unpaid-query", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              leadId: orderData.leadId,
-              fullName,
-              mobile,
-              email,
-              reason: `Payment failed: ${response.error?.description || "Gateway transaction declined"}`,
-              source: "zoho_form",
-            }),
-          });
-          setStage("unpaid_saved");
-          setLoading(false);
-        });
-        rzp.open();
-      } else {
-        // Fallback for simulation or if script not yet ready
-        setTimeout(async () => {
-          // Verify demo order
-          const mockPaymentId = `pay_mock_${Date.now().toString().slice(-8)}`;
-          await fetch("/api/payment/verify", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              razorpay_order_id: orderData.orderId,
-              razorpay_payment_id: mockPaymentId,
-              razorpay_signature: "mock_signature",
-              leadId: orderData.leadId,
-              amountPaid: 499,
-            }),
-          });
-          setPaymentDetails({
-            paymentId: mockPaymentId,
-            orderId: orderData.orderId,
-            amount: 499,
-            receipt: `SLE-DEMO-${Date.now().toString().slice(-4)}`,
-          });
-          setStage("paid_success");
-          setLoading(false);
-        }, 1500);
+      // Ensure Razorpay SDK script is 100% loaded before invoking
+      const scriptReady = await loadRazorpayCheckoutScript();
+      if (!scriptReady || typeof window === "undefined" || !window.Razorpay) {
+        throw new Error("Unable to load Razorpay payment gateway SDK. Please check your internet connection.");
       }
+
+      const rzp = new window.Razorpay(options);
+      rzp.on("payment.failed", async function (response: any) {
+        console.error("Payment Failed:", response.error);
+        await fetch("/api/payment/unpaid-query", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            leadId: orderData.leadId,
+            fullName,
+            mobile,
+            email,
+            reason: `Payment failed: ${response.error?.description || "Gateway transaction declined"}`,
+            source: "zoho_form",
+          }),
+        });
+        setStage("unpaid_saved");
+        setLoading(false);
+      });
+
+      rzp.open();
     } catch (err: any) {
       console.error(err);
       setErrorMsg(err.message || "Failed to launch Razorpay gateway.");

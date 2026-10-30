@@ -53,15 +53,14 @@ export default function HomeZohoSection({
           </p>
         </div>
 
-        <a
-          href={activeZohoUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition-colors self-start sm:self-auto shrink-0"
+        <Link
+          href="/consultation-payment"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-brand-emerald hover:bg-brand-emerald-dark text-white text-xs font-bold transition-colors self-start sm:self-auto shrink-0 shadow-sm"
         >
-          <span>Open Fullscreen</span>
-          <ExternalLink className="w-3.5 h-3.5" />
-        </a>
+          <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+          <span>Priority Advisory (₹499)</span>
+          <ArrowRight className="w-3.5 h-3.5" />
+        </Link>
       </div>
 
       {/* Embedded Zoho Form */}

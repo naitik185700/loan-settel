@@ -93,14 +93,14 @@ export default function ZohoConsultationEmbed({
                 Book a Confidential Debt Evaluation
               </h3>
             </div>
-            <a
-              href={activeZohoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors self-start sm:self-auto"
+            <Link
+              href="/consultation-payment"
+              className="inline-flex items-center gap-1.5 text-xs font-bold px-3.5 py-1.5 rounded-lg bg-brand-emerald hover:bg-brand-emerald-dark text-white transition-colors shadow-sm self-start sm:self-auto"
             >
-              Open Fullscreen Form <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+              <Zap className="w-3.5 h-3.5 text-amber-300 fill-amber-300" />
+              <span>Fast-Track Priority (₹499)</span>
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
 
           {/* Iframe with loading spinner */}
