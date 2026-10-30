@@ -18,12 +18,15 @@ const appUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(appUrl),
+  alternates: {
+    canonical: "https://settleloanexpert.in",
+  },
   title: {
-    default: "Settle Loan Expert | Debt Settlement & Loan Relief Advisors India",
+    default: "Settle Loan Expert | Debt Settlement & Relief India",
     template: "%s | Settle Loan Expert",
   },
   description:
-    "Confidential, ethical guidance on personal loan settlement, credit card debt resolution, and borrower rights under RBI guidelines in India. Regain financial stability.",
+    "Confidential debt settlement, credit card relief, and borrower legal protection under RBI guidelines in India. Resolve your debt and regain control.",
   keywords: [
     "loan settlement India",
     "credit card debt settlement",
@@ -135,6 +138,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <link rel="canonical" href="https://settleloanexpert.in" />
+        <meta
+          name="robots"
+          content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
