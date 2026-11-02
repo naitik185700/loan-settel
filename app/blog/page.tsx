@@ -67,13 +67,15 @@ export default async function BlogIndexPage() {
                       {post.readTime || "5 min read"}
                     </span>
                     <span>•</span>
-                    <span>
+                    <time dateTime={post.createdAt.toISOString()} itemProp="datePublished">
                       {new Date(post.createdAt).toLocaleDateString("en-IN", {
                         month: "short",
                         day: "numeric",
                         year: "numeric",
                       })}
-                    </span>
+                    </time>
+                    <span>•</span>
+                    <span className="text-brand-emerald font-medium">By {post.author || "Adv. Rajesh Verma"}</span>
                   </div>
 
                   <h2 className="text-lg font-bold text-brand-navy group-hover:text-brand-emerald transition-colors line-clamp-2 leading-snug">

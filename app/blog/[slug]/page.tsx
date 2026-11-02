@@ -5,8 +5,9 @@ import { notFound } from "next/navigation";
 import { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import EnquiryForm from "@/components/EnquiryForm";
+import EEATAuthorBio from "@/components/EEATAuthorBio";
 import { prisma } from "@/lib/prisma";
-import { Clock, Calendar, ArrowLeft, Share2, ShieldCheck } from "lucide-react";
+import { Clock, Calendar, ArrowLeft, Share2, ShieldCheck, CheckCircle2, BookOpen } from "lucide-react";
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -22,14 +23,30 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     return { title: "Article Not Found" };
   }
 
+  const authorName = post.author || "Adv. Rajesh Verma, Senior Banking Law Counsel";
+  const publishedIso = post.createdAt.toISOString();
+  const modifiedIso = post.updatedAt.toISOString();
+
   return {
     title: post.metaTitle || post.title,
     description: post.metaDescription || post.excerpt,
+    authors: [{ name: authorName, url: "https://settleloanexpert.in/about#editorial-board" }],
+    creator: authorName,
+    publisher: "Settle Loan Expert Advisory Services",
     openGraph: {
       title: post.metaTitle || post.title,
       description: post.metaDescription || post.excerpt,
       type: "article",
+      publishedTime: publishedIso,
+      modifiedTime: modifiedIso,
+      authors: [authorName],
       images: [post.featuredImage || "/images/hero-consultation.jpg"],
+    },
+    other: {
+      "article:published_time": publishedIso,
+      "article:modified_time": modifiedIso,
+      "article:author": authorName,
+      "article:section": post.category || "Financial Advisory",
     },
   };
 }
@@ -44,6 +61,20 @@ export default async function BlogPostPage({ params }: Props) {
     notFound();
   }
 
+  const authorName = post.author && post.author !== "Admin" ? post.author : "Adv. Rajesh Verma";
+  const publishedDateIso = post.createdAt.toISOString();
+  const modifiedDateIso = post.updatedAt.toISOString();
+  const publishedFormatted = new Date(post.createdAt).toLocaleDateString("en-IN", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+  const modifiedFormatted = new Date(post.updatedAt).toLocaleDateString("en-IN", {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  });
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -51,19 +82,38 @@ export default async function BlogPostPage({ params }: Props) {
     description: post.excerpt,
     image: post.featuredImage || "https://settleloanexpert.in/images/hero-consultation.jpg",
     author: {
-      "@type": "Organization",
-      name: post.author || "Settle Loan Expert Editorial Team",
+      "@type": "Person",
+      name: authorName,
+      jobTitle: "Senior Banking Law Counsel & Debt Advisory Lead",
+      worksFor: {
+        "@type": "Organization",
+        name: "Settle Loan Expert",
+        url: "https://settleloanexpert.in",
+      },
+      knowsAbout: [
+        "RBI Fair Practices Code",
+        "Debt Settlement in India",
+        "Banking Ombudsman Scheme",
+        "One-Time Settlement (OTS)",
+      ],
+      url: "https://settleloanexpert.in/about#editorial-board",
     },
     publisher: {
       "@type": "Organization",
       name: "Settle Loan Expert",
+      url: "https://settleloanexpert.in",
       logo: {
         "@type": "ImageObject",
         url: "https://settleloanexpert.in/images/logo.png",
       },
+      publishingPrinciples: "https://settleloanexpert.in/editorial-policy",
     },
-    datePublished: post.createdAt.toISOString(),
-    dateModified: post.updatedAt.toISOString(),
+    datePublished: publishedDateIso,
+    dateModified: modifiedDateIso,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://settleloanexpert.in/blog/${post.slug}`,
+    },
   };
 
   return (
@@ -75,7 +125,7 @@ export default async function BlogPostPage({ params }: Props) {
 
       {/* Top Banner */}
       <div className="bg-brand-navy py-12 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-5">
           <Breadcrumbs
             items={[
               { name: "Financial Guides", href: "/blog" },
@@ -88,23 +138,16 @@ export default async function BlogPostPage({ params }: Props) {
           <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-white leading-tight">
             {post.title}
           </h1>
-          <div className="flex flex-wrap items-center gap-4 text-xs text-slate-300 pt-2">
-            <span>By {post.author}</span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <Calendar className="w-3.5 h-3.5" />
-              {new Date(post.createdAt).toLocaleDateString("en-IN", {
-                month: "long",
-                day: "numeric",
-                year: "numeric",
-              })}
-            </span>
-            <span>•</span>
-            <span className="flex items-center gap-1">
-              <Clock className="w-3.5 h-3.5" />
-              {post.readTime}
-            </span>
-          </div>
+
+          {/* E-E-A-T Author Byline & Date Signals */}
+          <EEATAuthorBio
+            variant="byline"
+            authorName={authorName}
+            publishedDate={publishedDateIso}
+            modifiedDate={modifiedDateIso}
+            publishedFormatted={publishedFormatted}
+            modifiedFormatted={modifiedFormatted}
+          />
         </div>
       </div>
 
@@ -164,10 +207,23 @@ export default async function BlogPostPage({ params }: Props) {
               {/* Author and Disclaimer Note */}
               <div className="mt-8 pt-6 border-t border-brand-border/60 text-xs text-slate-400 space-y-2">
                 <p>
-                  <strong>Editorial Note:</strong> This guide is published for educational and general information purposes under Indian banking conventions and does not constitute formal legal counsel. For specific legal advice, consult an advocate or banking professional.
+                  <strong>Editorial Note:</strong> This guide is published for educational and general information purposes under Indian banking conventions and does not constitute formal legal counsel. For specific legal advice, consult an advocate or banking professional. Reviewed in accordance with our{" "}
+                  <Link href="/editorial-policy" rel="editorial-policy" className="text-brand-emerald underline font-semibold">
+                    Editorial Policy
+                  </Link>.
                 </p>
               </div>
             </div>
+
+            {/* Comprehensive Author Bio & E-E-A-T Credentials Card */}
+            <EEATAuthorBio
+              variant="full"
+              authorName={authorName}
+              publishedDate={publishedDateIso}
+              modifiedDate={modifiedDateIso}
+              publishedFormatted={publishedFormatted}
+              modifiedFormatted={modifiedFormatted}
+            />
 
             <div className="flex justify-between items-center pt-2">
               <Link

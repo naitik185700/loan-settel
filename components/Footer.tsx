@@ -136,6 +136,48 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* E-E-A-T Editorial Governance & Author Attribution */}
+        <div className="py-6 border-b border-brand-navy-800 text-xs text-slate-300 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          <div className="space-y-1" itemScope itemType="https://schema.org/Person">
+            <div className="flex items-center gap-2">
+              <span className="text-slate-400">Editorial &amp; Legal Review:</span>
+              <Link
+                href="/about#editorial-board"
+                rel="author"
+                itemProp="author"
+                className="text-white hover:text-brand-emerald-light font-bold underline decoration-brand-emerald"
+              >
+                <span itemProp="name">Adv. Rajesh Verma</span>
+              </Link>
+              <span className="text-brand-emerald-light text-[11px] font-semibold bg-brand-emerald/20 px-2 py-0.5 rounded-full">
+                Bar Council of Delhi &bull; 14+ Yrs
+              </span>
+            </div>
+            <p className="text-[11px] text-slate-400">
+              Senior Banking Law Counsel &bull; Supervised in strict accordance with our{" "}
+              <Link href="/editorial-policy" rel="editorial-policy" className="text-brand-emerald-light underline font-medium">
+                Editorial Policy
+              </Link>.
+            </p>
+          </div>
+
+          <div className="flex flex-wrap items-center gap-3 text-[11px] text-slate-400">
+            <span>
+              Published:{" "}
+              <time itemProp="datePublished" dateTime="2024-01-15T09:00:00+05:30" className="text-slate-200 font-medium">
+                Jan 15, 2024
+              </time>
+            </span>
+            <span>&bull;</span>
+            <span>
+              Last Updated &amp; Verified:{" "}
+              <time itemProp="dateModified" dateTime="2026-10-30T10:00:00+05:30" className="text-brand-emerald-light font-semibold">
+                Oct 30, 2026
+              </time>
+            </span>
+          </div>
+        </div>
+
         {/* Regulatory Disclaimer & Ethical Notice */}
         <div className="py-6 border-b border-brand-navy-800 text-xs text-slate-400 leading-relaxed space-y-3">
           <p>

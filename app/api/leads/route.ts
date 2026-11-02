@@ -29,12 +29,59 @@ export async function POST(req: NextRequest) {
       parsedData = leadFormSchema.parse(body);
     }
 
+    const effectiveMobile = (
+      parsedData.mobile ||
+      parsedData.phone ||
+      body.mobile ||
+      body.phone ||
+      ""
+    )
+      .replace(/\D/g, "")
+      .slice(-10);
+
+    if (!effectiveMobile || effectiveMobile.length < 10) {
+      return NextResponse.json(
+        { error: "Please enter a valid 10-digit Indian mobile number" },
+        { status: 400 }
+      );
+    }
+
+    const effectiveAmount =
+      parsedData.outstandingAmount ||
+      parsedData.outstandingRange ||
+      body.outstandingAmount ||
+      body.outstandingRange ||
+      null;
+
+    const effectiveTime =
+      parsedData.preferredTime ||
+      parsedData.preferredCallbackTime ||
+      body.preferredTime ||
+      body.preferredCallbackTime ||
+      null;
+
+    const situationDetails = [
+      parsedData.city || body.city ? `City: ${parsedData.city || body.city}` : null,
+      parsedData.lenderName || body.lenderName
+        ? `Lenders: ${parsedData.lenderName || body.lenderName}`
+        : null,
+      parsedData.preferredContact || body.preferredContact
+        ? `Preferred Contact: ${parsedData.preferredContact || body.preferredContact}`
+        : null,
+      parsedData.description ||
+      parsedData.difficultyReason ||
+      body.difficultyReason ||
+      null,
+    ]
+      .filter(Boolean)
+      .join(" | ");
+
     // 3. Prevent duplicate submissions within last 15 minutes with exact same phone & loan type (unless from admin)
     if (parsedData.source !== "admin_manual") {
       const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000);
       const existing = await prisma.lead.findFirst({
         where: {
-          mobile: parsedData.mobile,
+          mobile: effectiveMobile,
           loanCategory: parsedData.loanCategory,
           createdAt: { gte: fifteenMinutesAgo },
         },
@@ -55,12 +102,12 @@ export async function POST(req: NextRequest) {
     const lead = await prisma.lead.create({
       data: {
         fullName: parsedData.fullName,
-        mobile: parsedData.mobile,
+        mobile: effectiveMobile,
         email: parsedData.email || null,
         loanCategory: parsedData.loanCategory,
-        outstandingAmount: parsedData.outstandingAmount || null,
-        preferredTime: parsedData.preferredTime || null,
-        description: parsedData.description || null,
+        outstandingAmount: effectiveAmount,
+        preferredTime: effectiveTime,
+        description: situationDetails || null,
         source: parsedData.source || "website_form",
         consentGiven: parsedData.consentGiven,
         ipAddress: ip.split(",")[0].trim(),

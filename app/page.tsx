@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { BRAND } from "@/lib/constants";
 import EnquiryForm from "@/components/EnquiryForm";
 import FAQAccordion from "@/components/FAQAccordion";
+import EEATAuthorBio from "@/components/EEATAuthorBio";
 import {
   ShieldCheck,
   ArrowRight,
@@ -834,7 +835,29 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* 8. NATIVE LEAD-GENERATION CONSULTATION FORM */}
+      {/* 8. E-E-A-T ADVISORY BOARD, EDITORIAL POLICY & AUTHOR ATTRIBUTION */}
+      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center space-y-2 mb-6">
+          <span className="text-xs font-bold uppercase tracking-wider text-brand-emerald">
+            Trust &amp; Transparency
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-heading">
+            Legal Authority &amp; Editorial Standards
+          </h2>
+          <p className="text-sm text-brand-text max-w-xl mx-auto">
+            All debt resolution strategies, RBI regulatory summaries, and borrower rights resources are authored and vetted by experienced legal advocates.
+          </p>
+        </div>
+        <EEATAuthorBio
+          variant="full"
+          publishedDate="2024-01-15T09:00:00+05:30"
+          modifiedDate="2026-10-30T10:00:00+05:30"
+          publishedFormatted="January 15, 2024"
+          modifiedFormatted="October 30, 2026"
+        />
+      </section>
+
+      {/* 9. NATIVE LEAD-GENERATION CONSULTATION FORM */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
         <div className="text-center space-y-2 mb-8">
           <span className="text-xs font-bold uppercase tracking-wider text-brand-emerald">

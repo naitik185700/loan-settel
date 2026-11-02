@@ -12,20 +12,31 @@ export const leadFormSchema = z.object({
   mobile: z
     .string()
     .trim()
-    .regex(indianMobileRegex, "Please enter a valid 10-digit Indian mobile number"),
+    .optional(),
+  phone: z
+    .string()
+    .trim()
+    .optional(),
   email: z
     .string()
     .trim()
     .email("Please provide a valid email address")
     .optional()
     .or(z.literal("")),
+  city: z.string().optional().or(z.literal("")),
+  state: z.string().optional().or(z.literal("")),
   loanCategory: z.string().min(1, "Please select your loan category"),
+  lenderName: z.string().optional().or(z.literal("")),
   outstandingAmount: z.string().optional().or(z.literal("")),
+  outstandingRange: z.string().optional().or(z.literal("")),
   preferredTime: z.string().optional().or(z.literal("")),
+  preferredCallbackTime: z.string().optional().or(z.literal("")),
+  preferredContact: z.string().optional().or(z.literal("")),
+  difficultyReason: z.string().optional().or(z.literal("")),
   description: z
     .string()
     .trim()
-    .max(1000, "Description cannot exceed 1000 characters")
+    .max(2000, "Description cannot exceed 2000 characters")
     .optional()
     .or(z.literal("")),
   consentGiven: z.boolean().optional().default(true),
