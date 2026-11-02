@@ -11,7 +11,6 @@ export default function AdminSettingsPage() {
     support_email: BRAND.email,
     office_hours: BRAND.hours,
     head_office: BRAND.address,
-    zoho_form_url: BRAND.zohoFormUrl,
   });
 
   const [saving, setSaving] = useState(false);

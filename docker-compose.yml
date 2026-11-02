@@ -17,7 +17,6 @@ services:
       - NEXT_PUBLIC_COMPANY_NAME=Settle Loan Expert
       - NEXT_PUBLIC_PHONE=+91 88609 41586
       - NEXT_PUBLIC_EMAIL=support@settleloanexpert.in
-      - NEXT_PUBLIC_ZOHO_FORM_URL=https://forms.zohopublic.in/rddslegalsolutionsopcprivatel1/form/InquiryForm/formperma/HyvqgErILmK-RGLlxZhGBqi2leGDhXEjXaAgyI5RegI
     depends_on:
       postgres:
         condition: service_healthy

@@ -33,7 +33,7 @@ model Lead {
   description       String?
   status            String       @default("NEW") // NEW, CONTACTED, FOLLOW_UP, IN_PROGRESS, CONVERTED, CLOSED
   assignedTo        String?
-  source            String       @default("website_form") // website_form, callback_modal, hero_enquiry, zoho_link
+  source            String       @default("website_form") // website_form, callback_modal, hero_enquiry, manual_entry
   consentGiven      Boolean      @default(true)
   followUpDate      DateTime?
   ipAddress         String?

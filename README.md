@@ -30,7 +30,7 @@ The platform is designed around the official **Settle Loan Expert** brand tokens
 6. **Business Loan Assistance (`/services/business-loan-assistance`)**: MSME working capital restructuring and director guarantee analysis.
 7. **Debt Counselling & Repayment Guidance (`/services/debt-counselling-repayment-guidance`)**: Household budgeting, prioritization, and debt avalanche/snowball planning.
 8. **How It Works (`/how-it-works`)**: Full 4-step process walkthrough (Intake, Assessment, Options, Execution).
-9. **Free Consultation (`/free-consultation`)**: Includes the **Zoho CRM Consultation Form** integration (from DebtsFree) embedded seamlessly with direct fallback options.
+9. **Free Consultation (`/free-consultation`)**: Native high-conversion multi-step consultation intake form with instant lead routing to the admin panel and optional Priority Consultation upgrade.
 10. **Frequently Asked Questions (`/faqs`)**: Complete categorized FAQ bank with search and accordion interactions.
 11. **Financial Guides & Blog (`/blog` and `/blog/[slug]`)**: Educational articles on Indian banking regulations, recovery rules, and credit score rehabilitation.
 12. **Contact Us (`/contact`)**: Verified office address in Gurugram, helpline phone, direct email, and enquiry form.
@@ -49,7 +49,7 @@ The platform is designed around the official **Settle Loan Expert** brand tokens
 - **Lead Management (`/admin/leads`)**: Search, status filters (`NEW`, `CONTACTED`, `FOLLOW_UP`, `IN_PROGRESS`, `CONVERTED`, `CLOSED`), pagination, lead detail slide-over drawer, internal case notes, and follow-up scheduling.
 - **Blog CMS (`/admin/blogs`)**: Create, edit, draft, publish, and delete educational financial articles.
 - **FAQ Manager (`/admin/faqs`)**: Add, edit, reorder, and remove FAQs.
-- **Platform Settings (`/admin/settings`)**: Live configuration of telephone helpline, office address, operating hours, and Zoho form URL.
+- **Platform Settings (`/admin/settings`)**: Live configuration of telephone helpline, office address, and operating hours.
 - **Security Audit Logs (`/admin/audit-logs`)**: Immutable event logging of administrative actions and lead updates.
 
 ### Default Administrator Credentials (Initial Seed):
