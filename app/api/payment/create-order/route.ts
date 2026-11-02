@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
       loanCategory = "Personal Loan",
       outstandingAmount = "",
       amountInRupees = CONSULTATION_FEE_INR,
-      source = "zoho_form",
+      source = "consultation_portal",
     } = body;
 
     let targetLeadId = leadId;
@@ -38,14 +38,14 @@ export async function POST(req: NextRequest) {
       if (!targetLeadId) {
         const newLead = await prisma.lead.create({
           data: {
-            fullName: fullName || "Zoho Consultation Applicant",
+            fullName: fullName || "Consultation Applicant",
             mobile: mobile || "Pending Payment",
             email: email || null,
             loanCategory: loanCategory || "Personal Loan",
             outstandingAmount: outstandingAmount || null,
             status: "NEW",
             paymentStatus: "PENDING",
-            source: source || "zoho_form",
+            source: source || "consultation_portal",
           },
         });
         targetLeadId = newLead.id;

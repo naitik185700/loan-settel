@@ -19,18 +19,7 @@ export const leadFormSchema = z.object({
     .email("Please provide a valid email address")
     .optional()
     .or(z.literal("")),
-  loanCategory: z.enum(
-    [
-      "Personal Loan",
-      "Credit Card Debt",
-      "Business Loan",
-      "Multiple Loans / Mixed",
-      "Other",
-    ],
-    {
-      errorMap: () => ({ message: "Please select your loan category" }),
-    }
-  ),
+  loanCategory: z.string().min(1, "Please select your loan category"),
   outstandingAmount: z.string().optional().or(z.literal("")),
   preferredTime: z.string().optional().or(z.literal("")),
   description: z
@@ -39,11 +28,7 @@ export const leadFormSchema = z.object({
     .max(1000, "Description cannot exceed 1000 characters")
     .optional()
     .or(z.literal("")),
-  consentGiven: z.literal(true, {
-    errorMap: () => ({
-      message: "You must consent to receive communication regarding your enquiry",
-    }),
-  }),
+  consentGiven: z.boolean().optional().default(true),
   source: z.string().optional().default("website_form"),
 });
 

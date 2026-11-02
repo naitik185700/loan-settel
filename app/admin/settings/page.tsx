@@ -34,7 +34,7 @@ export default function AdminSettingsPage() {
           Platform Configuration & Settings
         </h1>
         <p className="text-xs sm:text-sm text-brand-muted mt-0.5">
-          Manage corporate contact channels, office timings, and Zoho CRM consultation integration
+          Manage corporate contact channels, office timings, and CRM platform configuration
         </p>
       </div>
 
@@ -126,32 +126,18 @@ export default function AdminSettingsPage() {
             />
           </div>
 
-          {/* Zoho Integration */}
-          <div className="p-4 bg-brand-surface rounded-xl border border-brand-border space-y-3">
+          {/* Form Storage Engine */}
+          <div className="p-4 bg-brand-surface rounded-xl border border-brand-border space-y-2">
             <div className="flex items-center justify-between">
               <label className="block text-xs font-bold text-brand-navy">
-                Zoho CRM Consultation Embed URL
+                Consultation Enquiry Engine
               </label>
-              <a
-                href={settings.zoho_form_url}
-                target="_blank"
-                rel="noreferrer"
-                className="text-[11px] font-semibold text-brand-emerald hover:underline flex items-center gap-1"
-              >
-                Test Zoho Link <ExternalLink className="w-3 h-3" />
-              </a>
+              <span className="text-[11px] font-semibold text-brand-emerald bg-brand-mint px-2.5 py-0.5 rounded-full border border-brand-border">
+                ✓ Native Database Active
+              </span>
             </div>
-            <input
-              type="url"
-              required
-              value={settings.zoho_form_url}
-              onChange={(e) =>
-                setSettings({ ...settings, zoho_form_url: e.target.value })
-              }
-              className="w-full px-3.5 py-2.5 text-xs font-mono border border-brand-border rounded-xl focus:outline-none focus:ring-2 focus:ring-brand-emerald bg-white"
-            />
-            <p className="text-[11px] text-slate-400">
-              The public consultation page loads this Zoho form securely inside the interactive evaluation portal.
+            <p className="text-xs text-brand-text leading-relaxed">
+              All website consultations are processed directly by your server and stored securely in your database. Leads appear in real-time in your Leads Management portal without any external form provider latency or dependencies.
             </p>
           </div>
 

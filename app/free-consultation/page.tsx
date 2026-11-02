@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import Breadcrumbs from "@/components/Breadcrumbs";
-import ZohoConsultationEmbed from "@/components/ZohoConsultationEmbed";
+import EnquiryForm from "@/components/EnquiryForm";
 import { BRAND } from "@/lib/constants";
 import {
   ShieldCheck,
@@ -19,10 +19,6 @@ export const metadata: Metadata = {
 };
 
 export default function FreeConsultationPage() {
-  const zohoUrl =
-    process.env.NEXT_PUBLIC_ZOHO_FORM_URL ||
-    "https://forms.zohopublic.in/rddslegalsolutionsopcprivatel1/form/InquiryForm/formperma/HyvqgErILmK-RGLlxZhGBqi2leGDhXEjXaAgyI5RegI";
-
   return (
     <div className="space-y-10 sm:space-y-12 pb-16">
       {/* Banner */}
@@ -78,8 +74,12 @@ export default function FreeConsultationPage() {
           </div>
         </div>
 
-        {/* The Zoho / Direct Consultation Component */}
-        <ZohoConsultationEmbed zohoUrl={zohoUrl} />
+        {/* Native Confidential Consultation Form */}
+        <EnquiryForm
+          source="free_consultation_page"
+          title="Confidential Case Evaluation"
+          subtitle="Speak with an experienced debt resolution advisor. No upfront fees to understand your rights."
+        />
 
         {/* Ethical / Advisory Notice */}
         <div className="p-5 rounded-2xl bg-brand-surface border border-brand-border text-xs text-brand-text space-y-2">

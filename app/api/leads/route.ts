@@ -29,23 +29,25 @@ export async function POST(req: NextRequest) {
       parsedData = leadFormSchema.parse(body);
     }
 
-    // 3. Prevent duplicate submissions within last 15 minutes with exact same phone & loan type
-    const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000);
-    const existing = await prisma.lead.findFirst({
-      where: {
-        mobile: parsedData.mobile,
-        loanCategory: parsedData.loanCategory,
-        createdAt: { gte: fifteenMinutesAgo },
-      },
-    });
-
-    if (existing) {
-      return NextResponse.json({
-        success: true,
-        message:
-          "Your enquiry has already been received. Our advisory team will contact you shortly during business hours.",
-        leadId: existing.id,
+    // 3. Prevent duplicate submissions within last 15 minutes with exact same phone & loan type (unless from admin)
+    if (parsedData.source !== "admin_manual") {
+      const fifteenMinutesAgo = new Date(Date.now() - 15 * 60 * 1000);
+      const existing = await prisma.lead.findFirst({
+        where: {
+          mobile: parsedData.mobile,
+          loanCategory: parsedData.loanCategory,
+          createdAt: { gte: fifteenMinutesAgo },
+        },
       });
+
+      if (existing) {
+        return NextResponse.json({
+          success: true,
+          message:
+            "Your enquiry has already been received. Our advisory team will contact you shortly during business hours.",
+          leadId: existing.id,
+        });
+      }
     }
 
     // 4. Save to Database
@@ -63,7 +65,17 @@ export async function POST(req: NextRequest) {
         consentGiven: parsedData.consentGiven,
         ipAddress: ip.split(",")[0].trim(),
         userAgent: userAgent ? userAgent.substring(0, 200) : null,
-        status: "NEW",
+        status: body.status || "NEW",
+        ...(body.note
+          ? {
+              notes: {
+                create: {
+                  authorName: "Admin",
+                  content: body.note.trim(),
+                },
+              },
+            }
+          : {}),
       },
     });
 

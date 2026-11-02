@@ -44,7 +44,7 @@ const loadRazorpayCheckoutScript = (): Promise<boolean> => {
 function ConsultationPaymentContent() {
   const searchParams = useSearchParams();
 
-  // URL parameters passed from Zoho Form redirect
+  // URL parameters passed from Consultation Form redirect
   const queryName = searchParams.get("name") || searchParams.get("fullName") || searchParams.get("Name") || "";
   const queryMobile = searchParams.get("mobile") || searchParams.get("phone") || searchParams.get("Phone") || "";
   const queryEmail = searchParams.get("email") || searchParams.get("Email") || "";
@@ -70,20 +70,20 @@ function ConsultationPaymentContent() {
     receipt?: string;
   } | null>(null);
 
-  // Automatically record initial query from Zoho if parameters were received
+  // Automatically record initial query if parameters were received
   useEffect(() => {
     if (queryMobile && !leadId) {
       fetch("/api/payment/unpaid-query", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          fullName: queryName || "Zoho Consultation Lead",
+          fullName: queryName || "Consultation Lead",
           mobile: queryMobile,
           email: queryEmail || null,
           loanCategory: queryCategory,
           outstandingAmount: queryAmount,
-          reason: "Zoho form submitted, awaiting payment decision",
-          source: "zoho_form",
+          reason: "Consultation inquiry received, reviewing priority callback option",
+          source: "consultation_portal",
         }),
       })
         .then((res) => res.json())
@@ -117,7 +117,7 @@ function ConsultationPaymentContent() {
           loanCategory,
           outstandingAmount,
           amountInRupees: 499,
-          source: "zoho_form",
+          source: "consultation_portal",
         }),
       });
 
@@ -152,7 +152,7 @@ function ConsultationPaymentContent() {
           ondismiss: async function () {
             // User closed the payment window without completing payment!
             console.log("Payment window closed. User did not pay.");
-            // Mark and record as standard unpaid query collected via Zoho
+            // Mark and record as standard unpaid query
             await fetch("/api/payment/unpaid-query", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -162,7 +162,7 @@ function ConsultationPaymentContent() {
                 mobile,
                 email,
                 reason: "Payment window was dismissed without completing payment",
-                source: "zoho_form",
+                source: "consultation_portal",
               }),
             });
             setStage("unpaid_saved");
@@ -223,7 +223,7 @@ function ConsultationPaymentContent() {
             mobile,
             email,
             reason: `Payment failed: ${response.error?.description || "Gateway transaction declined"}`,
-            source: "zoho_form",
+            source: "consultation_portal",
           }),
         });
         setStage("unpaid_saved");
@@ -247,13 +247,13 @@ function ConsultationPaymentContent() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           leadId,
-          fullName: fullName || "Zoho Consultation Applicant",
+          fullName: fullName || "Consultation Applicant",
           mobile,
           email,
           loanCategory,
           outstandingAmount,
           reason: "User opted for standard free query without priority payment",
-          source: "zoho_form",
+          source: "consultation_portal",
         }),
       });
       setStage("unpaid_saved");

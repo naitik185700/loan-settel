@@ -6,13 +6,13 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const {
       leadId,
-      fullName = "Zoho Consultation Applicant",
+      fullName = "Consultation Applicant",
       mobile = "",
       email = null,
       loanCategory = "Personal Loan",
       outstandingAmount = null,
       reason = "User skipped payment or payment was not completed",
-      source = "zoho_form",
+      source = "consultation_portal",
     } = body;
 
     let lead: any = null;
@@ -23,11 +23,11 @@ export async function POST(req: NextRequest) {
         data: {
           paymentStatus: "UNPAID",
           status: "NEW", // Saved as active standard consultation query in queue
-          source: source || "zoho_form",
+          source: source || "consultation_portal",
           notes: {
             create: {
               authorName: "System",
-              content: `Data collected via Zoho Form. ${reason}. Standard free evaluation query generated.`,
+              content: `${reason}. Standard free evaluation query generated.`,
             },
           },
         },
@@ -47,18 +47,18 @@ export async function POST(req: NextRequest) {
       if (!lead) {
         lead = await prisma.lead.create({
           data: {
-            fullName: fullName || "Zoho Consultation Applicant",
-            mobile: mobile || "Collected via Zoho",
+            fullName: fullName || "Consultation Applicant",
+            mobile: mobile || "Website Inquiry",
             email: email || null,
             loanCategory: loanCategory || "Personal Loan",
             outstandingAmount: outstandingAmount || null,
             status: "NEW",
             paymentStatus: "UNPAID",
-            source: source || "zoho_form",
+            source: source || "consultation_portal",
             notes: {
               create: {
-                authorName: "Zoho Integration",
-                content: `Initial data collected via Zoho Form. Free standard consultation query logged in CRM.`,
+                authorName: "Website Enquiry",
+                content: `Initial data collected via website consultation form. Free standard consultation query logged in CRM.`,
               },
             },
           },
@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
           data: {
             paymentStatus: "UNPAID",
             status: "NEW",
-            source: source || "zoho_form",
+            source: source || "consultation_portal",
           },
         });
       }

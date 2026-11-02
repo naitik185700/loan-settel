@@ -84,7 +84,7 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* KPI Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {/* Total Leads */}
         <div className="bg-white p-5 rounded-2xl border border-brand-border shadow-sm flex items-center justify-between">
           <div>
@@ -98,8 +98,8 @@ export default function AdminDashboardPage() {
               Across all channels
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-brand-mint text-brand-emerald flex items-center justify-center">
-            <Users className="w-6 h-6" />
+          <div className="w-11 h-11 rounded-xl bg-brand-mint text-brand-emerald flex items-center justify-center">
+            <Users className="w-5 h-5" />
           </div>
         </div>
 
@@ -113,11 +113,29 @@ export default function AdminDashboardPage() {
               {metrics.newLeads}
             </div>
             <div className="text-[11px] text-amber-700 font-semibold mt-0.5">
-              Awaiting advisor callback
+              Awaiting callback
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
-            <Clock className="w-6 h-6" />
+          <div className="w-11 h-11 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
+            <Clock className="w-5 h-5" />
+          </div>
+        </div>
+
+        {/* Paid Priority */}
+        <div className="bg-white p-5 rounded-2xl border border-brand-border shadow-sm flex items-center justify-between">
+          <div>
+            <div className="text-xs font-semibold uppercase tracking-wider text-brand-muted">
+              Paid Priority
+            </div>
+            <div className="text-2xl font-black text-emerald-600 mt-1">
+              {metrics.paidLeads || 0}
+            </div>
+            <div className="text-[11px] text-emerald-700 font-semibold mt-0.5">
+              ₹499 Fast-Track leads
+            </div>
+          </div>
+          <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
+            ₹
           </div>
         </div>
 
@@ -125,17 +143,17 @@ export default function AdminDashboardPage() {
         <div className="bg-white p-5 rounded-2xl border border-brand-border shadow-sm flex items-center justify-between">
           <div>
             <div className="text-xs font-semibold uppercase tracking-wider text-brand-muted">
-              In Active Negotiation
+              In Negotiation
             </div>
             <div className="text-2xl font-black text-brand-navy mt-1">
               {metrics.inProgressLeads}
             </div>
             <div className="text-[11px] text-brand-muted mt-0.5">
-              With bank settlement desks
+              With bank desks
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-blue-50 text-brand-navy flex items-center justify-center">
-            <TrendingUp className="w-6 h-6" />
+          <div className="w-11 h-11 rounded-xl bg-blue-50 text-brand-navy flex items-center justify-center">
+            <TrendingUp className="w-5 h-5" />
           </div>
         </div>
 
@@ -143,17 +161,17 @@ export default function AdminDashboardPage() {
         <div className="bg-white p-5 rounded-2xl border border-brand-border shadow-sm flex items-center justify-between">
           <div>
             <div className="text-xs font-semibold uppercase tracking-wider text-brand-muted">
-              Resolved & Settled
+              Resolved / OTS
             </div>
             <div className="text-2xl font-black text-emerald-600 mt-1">
               {metrics.convertedLeads}
             </div>
             <div className="text-[11px] text-emerald-700 font-semibold mt-0.5">
-              OTS letters executed
+              Settlements executed
             </div>
           </div>
-          <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-            <CheckCircle2 className="w-6 h-6" />
+          <div className="w-11 h-11 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
+            <CheckCircle2 className="w-5 h-5" />
           </div>
         </div>
       </div>
@@ -284,7 +302,7 @@ export default function AdminDashboardPage() {
                 href="/admin/settings"
                 className="block p-2 rounded-lg bg-white/10 hover:bg-white/20 transition-colors text-white"
               >
-                ⚙ Update Contact & Zoho Form URL
+                ⚙ Update Contact & Platform Settings
               </Link>
             </div>
           </div>
